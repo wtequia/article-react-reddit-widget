@@ -13,7 +13,43 @@
 
     {
 
-        alert("Me haz dado un click");
+       googletag = window.googletag || {cmd: []};
+    googletag.cmd.push(() => {
+
+       const rewardedSlot = googletag.defineOutOfPageSlot('/21955072735/elespectador-arc/rewarded-ad',googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
+        console.log("rewardedSlot", rewardedSlot);
+        var reward_granted = false;
+        
+       googletag.pubads().enableAsyncRendering();
+       googletag.enableServices();
+
+       googletag.pubads().addEventListener('rewardedSlotReady',
+       function(evt) {
+         if (confirm('Ver anuncio para desbloquear contenido:')) {
+           evt.makeRewardedVisible();
+         } else {
+           googletag.destroySlots([rewardedSlot]);
+         }
+       });
+
+       googletag.pubads().addEventListener('rewardedSlotGranted',
+       function(evt) {
+           console.log('granted! ' + JSON.stringify(evt.payload));
+           console.log(evt.payload);
+           reward_granted = true;
+       });
+
+       googletag.pubads().addEventListener('rewardedSlotClosed',
+       function(evt) {
+         if(!reward_granted){
+             alert('Closed by the user!');
+         }
+         googletag.destroySlots([rewardedSlot]);
+       });
+
+       googletag.display(rewardedSlot);
+
+       });
 
     }
 
