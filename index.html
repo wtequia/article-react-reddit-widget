@@ -1,137 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exemplo de tagueamento</title>
-  <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
-    <script type="text/javascript">
-
-    //EVENTOS EN javascript
-
-    function hacer_click()
-
-    {
-
-       googletag = window.googletag || {cmd: []};
-    googletag.cmd.push(() => {
-
-       const rewardedSlot = googletag.defineOutOfPageSlot('/21955072735/elespectador-arc/rewarded-ad',googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
-        console.log("rewardedSlot", rewardedSlot);
-        var reward_granted = false;
-        
-       googletag.pubads().enableAsyncRendering();
-       googletag.enableServices();
-
-       googletag.pubads().addEventListener('rewardedSlotReady',
-       function(evt) {
-         if (confirm('Ver anuncio para desbloquear contenido:')) {
-           evt.makeRewardedVisible();
-         } else {
-           googletag.destroySlots([rewardedSlot]);
-         }
-       });
-
-       googletag.pubads().addEventListener('rewardedSlotGranted',
-       function(evt) {
-           console.log('granted! ' + JSON.stringify(evt.payload));
-           console.log(evt.payload);
-           reward_granted = true;
-       });
-
-       googletag.pubads().addEventListener('rewardedSlotClosed',
-       function(evt) {
-         if(!reward_granted){
-             alert('Closed by the user!');
-         }
-         googletag.destroySlots([rewardedSlot]);
-       });
-
-       googletag.display(rewardedSlot);
-
-       });
-
-    }
-
-    function hacer_hover()
-
-    {
-
-        alert("Estas sobre mi!");
-
-    }
-
-    function salir_del_hover()
-
-    {
-
-        alert("Adios!");
-
-    }
-
-    function cargar_pagina()
-
-    {alert("Ya se ha cargado el sitio web");}
-
+  <head>
+    <meta charset="utf-8">
+    <title>Display an out-of-page ad</title>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script>
+      window.googletag = window.googletag || {cmd: []};
+      googletag.cmd.push(function() {
+        // Use defineOutOfPageSlot instead of defineSlot when working with
+        // out-of-page ads.
+        googletag.defineOutOfPageSlot('/6355419/Travel', 'out-of-page-ad')
+          .setTargeting('test', 'outofpage')
+          .addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
     </script>
-
-</head>
-<body>
-<p>
-Cras nunc augue inceptos mauris felis dapibus. Diam non mus volutpat commodo volutpat, venenatis sagittis. Blandit euismod lectus dis at magnis nibh euismod sollicitudin ut? Proin dui habitasse faucibus. Inceptos luctus morbi dis aliquam cursus nostra aptent commodo, vestibulum consequat himenaeos. Primis bibendum commodo ullamcorper eleifend, enim cras vitae. Duis.
-</p>
-<p>
-Potenti, ultrices maecenas lacinia. Orci luctus nascetur dictum at ullamcorper tortor, proin tellus consectetur! Inceptos fermentum mollis tellus vel magnis hac orci ornare sodales. Amet commodo id purus montes, habitasse mi eu vivamus vivamus. Quisque commodo maecenas enim. Purus mauris, quam metus nullam. Maecenas commodo nam hac quisque mollis blandit proin sollicitudin id blandit. Primis proin ligula integer lobortis amet nullam iaculis interdum parturient elit etiam. Pellentesque ridiculus proin parturient aliquet justo sodales pretium ad at magnis sollicitudin. Aliquet hendrerit et litora maecenas bibendum ultricies class!
-</p>
-<p>
-Conubia accumsan ad augue eget mattis rutrum ipsum. Id eleifend turpis etiam. Mattis pellentesque, posuere erat et placerat bibendum penatibus aliquam velit dictumst. Vivamus lacinia etiam taciti adipiscing etiam per blandit libero. Elementum platea vehicula auctor amet viverra justo, nibh amet iaculis eu. Congue porttitor primis id dapibus imperdiet nam ligula quisque consectetur suscipit blandit. Montes nisi inceptos a non. A congue donec potenti.
-</p>
-<p>
-Odio eleifend, hac dignissim eros morbi eget ridiculus. Est blandit varius mollis nostra mollis interdum consectetur, leo nascetur. Malesuada habitasse suscipit nisl semper scelerisque, ultricies curabitur aliquet blandit hac lobortis. Pharetra lobortis, nunc nec tempus. Habitant cras rutrum ut nostra dictum vitae! Sed euismod aptent auctor orci. Et parturient ultrices sodales dolor luctus dui ultricies, molestie enim. Dui posuere purus litora.
-</p>
-<p>
-Litora ligula orci mus sem accumsan class lectus faucibus inceptos dui? Aenean maecenas tempor placerat at vivamus nostra erat litora phasellus donec! Elementum, metus mauris lectus mi convallis ornare ac convallis taciti! Vitae magna luctus dictumst faucibus condimentum. Etiam arcu porttitor, lacinia proin. Arcu pellentesque phasellus condimentum fermentum interdum quam mattis metus tempus himenaeos quam posuere. Mus venenatis congue vestibulum etiam, porta interdum etiam ad praesent tristique. Ornare, consectetur fusce parturient tempor ligula. Ac urna laoreet lacinia sodales arcu vestibulum diam vitae faucibus, morbi urna.
-</p>
-<p>
-Parturient ipsum curae; purus potenti dignissim quis tellus eu. Interdum per elementum eleifend dui per lectus diam sem, magna euismod feugiat justo. Erat urna amet lorem parturient duis porta tincidunt magna phasellus habitasse. Hendrerit sed rhoncus venenatis porttitor. Natoque nascetur euismod ut nulla sed interdum blandit ridiculus viverra tellus a. Elit tellus senectus!
-</p>
-<p>
-Nisl ultricies ridiculus potenti cum consectetur bibendum fames justo curae; vel primis. Bibendum lobortis blandit mi blandit eleifend congue pretium pulvinar scelerisque vulputate. Nec nam sed aliquet sollicitudin praesent ridiculus. Ornare arcu nostra per sociosqu duis sociis parturient porta leo himenaeos. Primis euismod suscipit aptent in ornare. Vivamus molestie augue fringilla vitae, nostra hac. Suspendisse fermentum nibh velit at pretium torquent interdum scelerisque. Penatibus sit laoreet ad dui natoque per lorem maecenas. Quis est, elementum fringilla augue placerat convallis fusce? Amet vel sodales magna tincidunt primis dis vivamus potenti. Leo per sem, facilisi duis.
-</p>
-<p>
-Nascetur tempor torquent mollis porta elementum. Lectus pretium lacus porta aptent mollis luctus tortor sem diam penatibus. Mus imperdiet torquent hendrerit interdum, taciti viverra nec aptent facilisis sociis adipiscing. Scelerisque feugiat habitant habitasse et tristique, turpis velit odio tristique vehicula congue fusce. Faucibus justo eleifend, aliquam iaculis venenatis lobortis vivamus quam varius. Vulputate eros vel habitant fermentum blandit morbi aptent laoreet mi. Nascetur elementum metus nam dui rutrum nostra elit gravida laoreet. Leo imperdiet, sem nunc ornare. Dapibus justo nisl tincidunt est parturient, lectus maecenas est. Tempor vel aptent risus hendrerit mattis malesuada. Netus.
-</p>
-<p>
-Fusce himenaeos tortor adipiscing enim ridiculus. Bibendum sociis nec egestas. Nam odio vestibulum maecenas vel mollis consectetur adipiscing venenatis. Massa quam nunc nec est blandit venenatis! Sociosqu tristique imperdiet vivamus ipsum hac risus consequat vitae platea. Natoque fusce aliquet id arcu ac. Convallis viverra amet vestibulum! Amet netus aptent lacinia dolor interdum taciti! Suspendisse sapien sed mattis sem praesent arcu curae;?
-</p>
-<p>
-Aenean himenaeos malesuada rutrum non vitae ante suspendisse porta? Ultricies dictum nunc etiam at erat non aptent varius posuere. Ipsum dapibus quam molestie, fusce lacinia. Porta hendrerit posuere cum amet adipiscing purus. Facilisis luctus metus ornare vivamus suscipit tincidunt netus viverra habitasse in lorem. Fermentum eros, auctor augue mi. Ullamcorper blandit suscipit natoque adipiscing vulputate hac posuere bibendum mollis. Luctus himenaeos varius mollis orci? Suspendisse morbi himenaeos tempus dictumst risus cubilia inceptos. Phasellus risus bibendum curae; sociis nunc turpis per vivamus pharetra. Volutpat mattis ad egestas quisque interdum natoque nibh urna sociis semper. Etiam.
-</p>
-<p>
-Laoreet rutrum ac fusce proin nibh sed ridiculus ut elementum. Ut felis vel ante tellus? Faucibus non tempus sapien massa tincidunt fermentum. Sapien ac euismod elit commodo dis aptent torquent. Vitae tempor mi tortor curae; odio malesuada dictumst neque pharetra et. Id fringilla blandit libero eros, ridiculus in eleifend senectus. Cubilia porttitor praesent ut. Platea, gravida primis gravida odio habitant proin fusce facilisis. Massa libero tempus adipiscing. Dui consectetur natoque curabitur cubilia sed. Magna tristique habitasse, tristique interdum. Sapien dignissim placerat amet ipsum nisl scelerisque phasellus id ipsum cras egestas. In id sodales.
-</p>
-<p>
-Laoreet vitae et diam suscipit himenaeos nisl senectus fusce elit dignissim tortor netus. Vehicula sodales primis tristique fermentum ultrices malesuada; dis hac quis est parturient donec. Vulputate non lorem odio proin! Senectus dis scelerisque natoque morbi. Facilisi eleifend natoque laoreet viverra nullam. Vehicula curae; molestie non ac. Inceptos sagittis ut sociosqu vel! Hac pulvinar sociosqu fames. Semper curabitur volutpat hac tempus nam fringilla turpis porttitor. Praesent enim purus leo.
-</p>
-<p>
-Ornare facilisis sed nec sagittis commodo? Luctus quis eleifend integer commodo purus lobortis per magnis fames. Nullam eros fringilla arcu ullamcorper. Ante mattis, eleifend habitant imperdiet dictum at curabitur netus a commodo? Pellentesque justo adipiscing curabitur, urna felis gravida dis dolor laoreet nulla. Proin nisl fames urna bibendum sodales mauris diam ullamcorper curae; interdum. Cubilia vestibulum penatibus gravida. Dolor consequat laoreet, himenaeos vitae posuere metus cras commodo hendrerit turpis adipiscing orci. Vel id molestie, mattis euismod fames at in litora eleifend!
-</p>
-<p>
-Lorem etiam torquent sit quam in. Sagittis phasellus adipiscing mi quis. Erat adipiscing magnis est, ante himenaeos tristique purus gravida sagittis torquent mattis. Morbi, imperdiet sapien tristique. Hendrerit aliquam hac dapibus! Ante ornare hendrerit nam nulla. Aenean convallis ullamcorper curabitur. Diam gravida primis nascetur ut pulvinar eleifend suspendisse dignissim dis. Venenatis congue lacinia sociosqu ornare class sed inceptos. Lacus senectus himenaeos class consequat. Tristique sit ac scelerisque. Condimentum amet inceptos laoreet interdum felis aptent. Praesent porttitor libero proin.
-</p>
-<p>
-Mus rutrum amet facilisi euismod amet mollis. Dapibus ligula ornare augue sit faucibus in egestas lobortis aliquet himenaeos nec. Varius ad etiam egestas magnis himenaeos pretium dis tristique. Mauris aenean nostra duis dapibus aptent odio, urna euismod. Convallis dictum fames nullam id magnis libero hac. Dapibus, imperdiet libero sociosqu posuere class nisi. Lacus est interdum molestie. Malesuada erat dapibus ornare dapibus phasellus lectus donec sodales mus pulvinar phasellus vivamus. Tellus lacus ad cras ultricies blandit aptent nisl nisl consequat lobortis magna. In molestie facilisi scelerisque vitae dictum metus vivamus! Laoreet mi.
-</p>
-<p>
-Nullam habitant placerat netus nulla ultricies. Varius purus faucibus nam quis. Eros suscipit orci dis. Taciti pellentesque maecenas egestas morbi in vestibulum aliquam pellentesque iaculis nam scelerisque. Sociosqu class fermentum, orci felis. Vestibulum ullamcorper aenean hac luctus? Litora, parturient tincidunt quisque. Congue condimentum nibh elementum eleifend auctor ut fusce congue netus luctus. Penatibus malesuada massa dui purus odio id habitant magna nisi nascetur. Lorem hendrerit duis elit scelerisque. Vivamus mi primis nascetur ligula massa nibh convallis lacinia litora dis platea. Taciti aptent, mattis fames platea primis! Tortor non, eget sociosqu senectus fames.
-</p>
-<button onclick="prueba()">What is the time?</button>
- <form>
-
-            <input type="button" value="dame click!"  onmouseout="salir_del_hover()" onmouseover="hacer_hover()" onclick="hacer_click()"/>
-
-        </form>
-
-</body>
+  </head>
+  <body>
+    <div id="out-of-page-ad">
+      <script>
+        googletag.cmd.push(function() {
+          googletag.display('out-of-page-ad');
+        });
+      </script>
+    </div>
+  </body>
 </html>
 
