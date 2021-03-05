@@ -15,7 +15,7 @@
         
        googletag.pubads().enableAsyncRendering();
        googletag.enableServices();
-
+      console.log("googletag", googletag);
        googletag.pubads().addEventListener('rewardedSlotReady',
        function(evt) {
          if (confirm('Ver anuncio para desbloquear contenido:')) {
