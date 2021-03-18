@@ -4,23 +4,18 @@
   <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exemplo de tagueamento</title>
-<link
-          rel='preload'
-          href='//www.googletagservices.com/tag/js/gpt.js'
-          as='script'
-   ></link>
-  
+  <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
   <script>      
     googletag = window.googletag || {cmd: []};
     googletag.cmd.push(() => {
 
        const rewardedSlot = googletag.defineOutOfPageSlot('/21955072735/elespectador-arc/rewarded-ad',googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
-        console.log("rewardedSlot", rewardedSlot);
+        
         var reward_granted = false;
         
        googletag.pubads().enableAsyncRendering();
        googletag.enableServices();
-      console.log("googletag", googletag);
+
        googletag.pubads().addEventListener('rewardedSlotReady',
        function(evt) {
          if (confirm('Ver anuncio para desbloquear contenido:')) {
@@ -101,4 +96,3 @@ Nullam habitant placerat netus nulla ultricies. Varius purus faucibus nam quis. 
 </p>
 </body>
 </html>
-
