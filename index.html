@@ -1,98 +1,255 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exemplo de tagueamento</title>
-  <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
-  <script>      
-    googletag = window.googletag || {cmd: []};
-    googletag.cmd.push(() => {
-
-       const rewardedSlot = googletag.defineOutOfPageSlot('/21955072735/elespectador-arc/rewarded-ad',googletag.enums.OutOfPageFormat.REWARDED).addService(googletag.pubads());
-        
-        var reward_granted = false;
-        
-       googletag.pubads().enableAsyncRendering();
-       googletag.enableServices();
-
-       googletag.pubads().addEventListener('rewardedSlotReady',
-       function(evt) {
-         if (confirm('Ver anuncio para desbloquear contenido:')) {
-           evt.makeRewardedVisible();
-         } else {
-           googletag.destroySlots([rewardedSlot]);
-         }
-       });
-
-       googletag.pubads().addEventListener('rewardedSlotGranted',
-       function(evt) {
-           console.log('granted! ' + JSON.stringify(evt.payload));
-           console.log(evt.payload);
-           reward_granted = true;
-       });
-
-       googletag.pubads().addEventListener('rewardedSlotClosed',
-       function(evt) {
-         if(!reward_granted){
-             alert('Closed by the user!');
-         }
-         googletag.destroySlots([rewardedSlot]);
-       });
-
-       googletag.display(rewardedSlot);
-
-       });
+  <meta name="generator" content="Google Web Designer 11.0.0.0323">
+  <meta name="template" content="Interstitial 3.0.0">
+  <meta name="environment" content="gwd-dv360">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="gwdpage_style.css" rel="stylesheet" data-version="13" data-exports-type="gwd-page">
+  <link href="gwdpagedeck_style.css" rel="stylesheet" data-version="14" data-exports-type="gwd-pagedeck">
+  <link href="gwdgooglead_style.css" rel="stylesheet" data-version="8" data-exports-type="gwd-google-ad">
+  <link href="gwdimage_style.css" rel="stylesheet" data-version="16" data-exports-type="gwd-image">
+  <link href="gwdtaparea_style.css" rel="stylesheet" data-version="7" data-exports-type="gwd-taparea">
+  <style type="text/css" id="gwd-lightbox-style">
+    .gwd-lightbox {
+      overflow: hidden;
+    }
+  </style>
+  <style type="text/css" id="gwd-text-style">
+    p {
+      margin: 0px;
+    }
+    h1 {
+      margin: 0px;
+    }
+    h2 {
+      margin: 0px;
+    }
+    h3 {
+      margin: 0px;
+    }
+  </style>
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+    }
+    .gwd-page-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .gwd-page-content {
+      background-color: transparent;
+      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      transform-style: preserve-3d;
+      position: absolute;
+    }
+    .gwd-page-wrapper {
+      background-color: rgb(255, 255, 255);
+      position: absolute;
+      transform: translateZ(0px);
+    }
+    .gwd-page-size {
+      width: 100%;
+      height: 100%;
+    }
+    .close-button {
+      display: block;
+      height: 30px;
+      position: absolute;
+      width: 30px;
+      left: 1152px;
+      top: 234px;
+    }
+    .gwd-image-1l7r {
+      position: absolute;
+      top: 195px;
+      width: 32px;
+      transform-style: preserve-3d;
+      left: 50%;
+      height: 32px;
+      transform: translate3d(459px, -29px, 0px);
+    }
+    .gwd-taparea-kdzo {
+      display: block;
+      position: absolute;
+      top: 61px;
+      left: 50%;
+      transform-style: preserve-3d;
+      width: 105px;
+      height: 96px;
+      transform-origin: 52.1468px 47.8808px 0px;
+      transform: translate3d(406px, 96px, 0px);
+    }
+    .gwd-image-c569 {
+      position: absolute;
+      width: 1024px;
+      height: 145px;
+      top: 0px;
+      left: 50%;
+      transform: translate3d(-512px, 0px, 0px);
+      transform-style: preserve-3d;
+    }
+    .gwd-p-xnx2 {
+      position: absolute;
+      top: 760px;
+      left: 50%;
+      transform-style: preserve-3d;
+      height: 18px;
+      font-style: normal;
+      width: 70px;
+      transform-origin: 34.8335px 8.88889px 0px;
+      font-family: Arial;
+      color: rgb(250, 247, 247);
+      font-size: 17px;
+      transform: translate3d(421px, -4px, 0px);
+    }
+    .gwd-div-19fq {
+      position: absolute;
+      top: 760px;
+      height: 22px;
+      left: 50%;
+      transform-style: preserve-3d;
+      margin: 0px;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(0, 0, 0);
+      border-width: 1px;
+      border-radius: 1%;
+      border-style: none;
+      background-image: none;
+      background-color: rgb(234, 8, 11);
+      width: 1024px;
+      transform-origin: 511.206px 10.9597px 0px;
+      transform: translate3d(-512px, -5px, 0px);
+    }
+    .gwd-image-1r89 {
+      position: absolute;
+      width: 1024px;
+      height: 600px;
+      transform-style: preserve-3d;
+      left: 50%;
+      top: 242px;
+      transform: translate3d(-512px, -90px, 0px);
+    }
+    .gwd-taparea-x3rr {
+      border-color: rgba(0, 0, 0, 0);
+      display: block;
+      height: 600px;
+      position: absolute;
+      width: 1024px;
+      transform-style: preserve-3d;
+      left: 50%;
+      transform: translate3d(-512px, -95px, 0px);
+      top: 250px;
+    }
+  </style>
+  <script data-source="googbase_min.js" data-version="4" data-exports-type="googbase" src="googbase_min.js"></script>
+  <script data-source="gwd_webcomponents_v1_min.js" data-version="2" data-exports-type="gwd_webcomponents_v1" src="gwd_webcomponents_v1_min.js"></script>
+  <script data-source="gwdpage_min.js" data-version="13" data-exports-type="gwd-page" src="gwdpage_min.js"></script>
+  <script data-source="gwdpagedeck_min.js" data-version="14" data-exports-type="gwd-pagedeck" src="gwdpagedeck_min.js"></script>
+  <script data-source="https://s0.2mdn.net/ads/studio/Enabler.js" data-exports-type="gwd-google-ad" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+  <script data-source="gwdgooglead_min.js" data-version="8" data-exports-type="gwd-google-ad" src="gwdgooglead_min.js"></script>
+  <script data-source="gwdimage_min.js" data-version="16" data-exports-type="gwd-image" src="gwdimage_min.js"></script>
+  <script data-source="gwdtaparea_min.js" data-version="7" data-exports-type="gwd-taparea" src="gwdtaparea_min.js"></script>
+  <script type="text/javascript" gwd-events="support" src="gwd-events-support.1.0.js"></script>
+  <script type="text/javascript" gwd-events="handlers">
+    window.gwd = window.gwd || {};
+    gwd.auto_Gwd_taparea_1Action = function(event) {
+      // GWD Predefined Function
+      gwd.actions.gwdGoogleAd.exit('gwd-ad', 'clickTag', 'https://www.elespectador.com/static_specials/377/pauteconnosotros/index.html', true, true, 'page1');
+    };
+    gwd.closeAd = function(event) {
+      Enabler.reportManualClose();
+      Enabler.close();
+    };
+    gwd.auto_Bg_exit_LAction = function(event) {
+      // GWD Predefined Function
+      gwd.actions.gwdGoogleAd.exit('gwd-ad', 'bg-exit-L', 'https://shop.samsung.com.co/?utm_source=paid_elespectador_samsung_awareness&utm_medium=cheil_awareness_team_paiddisplay&utm_campaign=compra-seguro_launch_cross_open_general-medium_home_general_2021-04-08_brandawareness_general&utm_content=prehome_general', true, true, 'page1');
+    };
+  </script>
+  <script type="text/javascript" gwd-events="registration">
+    // Código de soporte para el manejo de eventos en Google Web Designer
+    // Este bloque de secuencia de comandos se genera automáticamente. No lo modifique.
+    gwd.actions.events.registerEventHandlers = function(event) {
+      gwd.actions.events.addHandler('gwd-taparea_1', 'click', gwd.closeAd, false);
+      gwd.actions.events.addHandler('bg-exit-L', 'action', gwd.auto_Bg_exit_LAction, false);
+    };
+    gwd.actions.events.deregisterEventHandlers = function(event) {
+      gwd.actions.events.removeHandler('gwd-taparea_1', 'click', gwd.closeAd, false);
+      gwd.actions.events.removeHandler('bg-exit-L', 'action', gwd.auto_Bg_exit_LAction, false);
+    };
+    document.addEventListener("DOMContentLoaded", gwd.actions.events.registerEventHandlers);
+    document.addEventListener("unload", gwd.actions.events.deregisterEventHandlers);
   </script>
 </head>
+
 <body>
-<p>
-Cras nunc augue inceptos mauris felis dapibus. Diam non mus volutpat commodo volutpat, venenatis sagittis. Blandit euismod lectus dis at magnis nibh euismod sollicitudin ut? Proin dui habitasse faucibus. Inceptos luctus morbi dis aliquam cursus nostra aptent commodo, vestibulum consequat himenaeos. Primis bibendum commodo ullamcorper eleifend, enim cras vitae. Duis.
-</p>
-<p>
-Potenti, ultrices maecenas lacinia. Orci luctus nascetur dictum at ullamcorper tortor, proin tellus consectetur! Inceptos fermentum mollis tellus vel magnis hac orci ornare sodales. Amet commodo id purus montes, habitasse mi eu vivamus vivamus. Quisque commodo maecenas enim. Purus mauris, quam metus nullam. Maecenas commodo nam hac quisque mollis blandit proin sollicitudin id blandit. Primis proin ligula integer lobortis amet nullam iaculis interdum parturient elit etiam. Pellentesque ridiculus proin parturient aliquet justo sodales pretium ad at magnis sollicitudin. Aliquet hendrerit et litora maecenas bibendum ultricies class!
-</p>
-<p>
-Conubia accumsan ad augue eget mattis rutrum ipsum. Id eleifend turpis etiam. Mattis pellentesque, posuere erat et placerat bibendum penatibus aliquam velit dictumst. Vivamus lacinia etiam taciti adipiscing etiam per blandit libero. Elementum platea vehicula auctor amet viverra justo, nibh amet iaculis eu. Congue porttitor primis id dapibus imperdiet nam ligula quisque consectetur suscipit blandit. Montes nisi inceptos a non. A congue donec potenti.
-</p>
-<p>
-Odio eleifend, hac dignissim eros morbi eget ridiculus. Est blandit varius mollis nostra mollis interdum consectetur, leo nascetur. Malesuada habitasse suscipit nisl semper scelerisque, ultricies curabitur aliquet blandit hac lobortis. Pharetra lobortis, nunc nec tempus. Habitant cras rutrum ut nostra dictum vitae! Sed euismod aptent auctor orci. Et parturient ultrices sodales dolor luctus dui ultricies, molestie enim. Dui posuere purus litora.
-</p>
-<p>
-Litora ligula orci mus sem accumsan class lectus faucibus inceptos dui? Aenean maecenas tempor placerat at vivamus nostra erat litora phasellus donec! Elementum, metus mauris lectus mi convallis ornare ac convallis taciti! Vitae magna luctus dictumst faucibus condimentum. Etiam arcu porttitor, lacinia proin. Arcu pellentesque phasellus condimentum fermentum interdum quam mattis metus tempus himenaeos quam posuere. Mus venenatis congue vestibulum etiam, porta interdum etiam ad praesent tristique. Ornare, consectetur fusce parturient tempor ligula. Ac urna laoreet lacinia sodales arcu vestibulum diam vitae faucibus, morbi urna.
-</p>
-<p>
-Parturient ipsum curae; purus potenti dignissim quis tellus eu. Interdum per elementum eleifend dui per lectus diam sem, magna euismod feugiat justo. Erat urna amet lorem parturient duis porta tincidunt magna phasellus habitasse. Hendrerit sed rhoncus venenatis porttitor. Natoque nascetur euismod ut nulla sed interdum blandit ridiculus viverra tellus a. Elit tellus senectus!
-</p>
-<p>
-Nisl ultricies ridiculus potenti cum consectetur bibendum fames justo curae; vel primis. Bibendum lobortis blandit mi blandit eleifend congue pretium pulvinar scelerisque vulputate. Nec nam sed aliquet sollicitudin praesent ridiculus. Ornare arcu nostra per sociosqu duis sociis parturient porta leo himenaeos. Primis euismod suscipit aptent in ornare. Vivamus molestie augue fringilla vitae, nostra hac. Suspendisse fermentum nibh velit at pretium torquent interdum scelerisque. Penatibus sit laoreet ad dui natoque per lorem maecenas. Quis est, elementum fringilla augue placerat convallis fusce? Amet vel sodales magna tincidunt primis dis vivamus potenti. Leo per sem, facilisi duis.
-</p>
-<p>
-Nascetur tempor torquent mollis porta elementum. Lectus pretium lacus porta aptent mollis luctus tortor sem diam penatibus. Mus imperdiet torquent hendrerit interdum, taciti viverra nec aptent facilisis sociis adipiscing. Scelerisque feugiat habitant habitasse et tristique, turpis velit odio tristique vehicula congue fusce. Faucibus justo eleifend, aliquam iaculis venenatis lobortis vivamus quam varius. Vulputate eros vel habitant fermentum blandit morbi aptent laoreet mi. Nascetur elementum metus nam dui rutrum nostra elit gravida laoreet. Leo imperdiet, sem nunc ornare. Dapibus justo nisl tincidunt est parturient, lectus maecenas est. Tempor vel aptent risus hendrerit mattis malesuada. Netus.
-</p>
-<p>
-Fusce himenaeos tortor adipiscing enim ridiculus. Bibendum sociis nec egestas. Nam odio vestibulum maecenas vel mollis consectetur adipiscing venenatis. Massa quam nunc nec est blandit venenatis! Sociosqu tristique imperdiet vivamus ipsum hac risus consequat vitae platea. Natoque fusce aliquet id arcu ac. Convallis viverra amet vestibulum! Amet netus aptent lacinia dolor interdum taciti! Suspendisse sapien sed mattis sem praesent arcu curae;?
-</p>
-<p>
-Aenean himenaeos malesuada rutrum non vitae ante suspendisse porta? Ultricies dictum nunc etiam at erat non aptent varius posuere. Ipsum dapibus quam molestie, fusce lacinia. Porta hendrerit posuere cum amet adipiscing purus. Facilisis luctus metus ornare vivamus suscipit tincidunt netus viverra habitasse in lorem. Fermentum eros, auctor augue mi. Ullamcorper blandit suscipit natoque adipiscing vulputate hac posuere bibendum mollis. Luctus himenaeos varius mollis orci? Suspendisse morbi himenaeos tempus dictumst risus cubilia inceptos. Phasellus risus bibendum curae; sociis nunc turpis per vivamus pharetra. Volutpat mattis ad egestas quisque interdum natoque nibh urna sociis semper. Etiam.
-</p>
-<p>
-Laoreet rutrum ac fusce proin nibh sed ridiculus ut elementum. Ut felis vel ante tellus? Faucibus non tempus sapien massa tincidunt fermentum. Sapien ac euismod elit commodo dis aptent torquent. Vitae tempor mi tortor curae; odio malesuada dictumst neque pharetra et. Id fringilla blandit libero eros, ridiculus in eleifend senectus. Cubilia porttitor praesent ut. Platea, gravida primis gravida odio habitant proin fusce facilisis. Massa libero tempus adipiscing. Dui consectetur natoque curabitur cubilia sed. Magna tristique habitasse, tristique interdum. Sapien dignissim placerat amet ipsum nisl scelerisque phasellus id ipsum cras egestas. In id sodales.
-</p>
-<p>
-Laoreet vitae et diam suscipit himenaeos nisl senectus fusce elit dignissim tortor netus. Vehicula sodales primis tristique fermentum ultrices malesuada; dis hac quis est parturient donec. Vulputate non lorem odio proin! Senectus dis scelerisque natoque morbi. Facilisi eleifend natoque laoreet viverra nullam. Vehicula curae; molestie non ac. Inceptos sagittis ut sociosqu vel! Hac pulvinar sociosqu fames. Semper curabitur volutpat hac tempus nam fringilla turpis porttitor. Praesent enim purus leo.
-</p>
-<p>
-Ornare facilisis sed nec sagittis commodo? Luctus quis eleifend integer commodo purus lobortis per magnis fames. Nullam eros fringilla arcu ullamcorper. Ante mattis, eleifend habitant imperdiet dictum at curabitur netus a commodo? Pellentesque justo adipiscing curabitur, urna felis gravida dis dolor laoreet nulla. Proin nisl fames urna bibendum sodales mauris diam ullamcorper curae; interdum. Cubilia vestibulum penatibus gravida. Dolor consequat laoreet, himenaeos vitae posuere metus cras commodo hendrerit turpis adipiscing orci. Vel id molestie, mattis euismod fames at in litora eleifend!
-</p>
-<p>
-Lorem etiam torquent sit quam in. Sagittis phasellus adipiscing mi quis. Erat adipiscing magnis est, ante himenaeos tristique purus gravida sagittis torquent mattis. Morbi, imperdiet sapien tristique. Hendrerit aliquam hac dapibus! Ante ornare hendrerit nam nulla. Aenean convallis ullamcorper curabitur. Diam gravida primis nascetur ut pulvinar eleifend suspendisse dignissim dis. Venenatis congue lacinia sociosqu ornare class sed inceptos. Lacus senectus himenaeos class consequat. Tristique sit ac scelerisque. Condimentum amet inceptos laoreet interdum felis aptent. Praesent porttitor libero proin.
-</p>
-<p>
-Mus rutrum amet facilisi euismod amet mollis. Dapibus ligula ornare augue sit faucibus in egestas lobortis aliquet himenaeos nec. Varius ad etiam egestas magnis himenaeos pretium dis tristique. Mauris aenean nostra duis dapibus aptent odio, urna euismod. Convallis dictum fames nullam id magnis libero hac. Dapibus, imperdiet libero sociosqu posuere class nisi. Lacus est interdum molestie. Malesuada erat dapibus ornare dapibus phasellus lectus donec sodales mus pulvinar phasellus vivamus. Tellus lacus ad cras ultricies blandit aptent nisl nisl consequat lobortis magna. In molestie facilisi scelerisque vitae dictum metus vivamus! Laoreet mi.
-</p>
-<p>
-Nullam habitant placerat netus nulla ultricies. Varius purus faucibus nam quis. Eros suscipit orci dis. Taciti pellentesque maecenas egestas morbi in vestibulum aliquam pellentesque iaculis nam scelerisque. Sociosqu class fermentum, orci felis. Vestibulum ullamcorper aenean hac luctus? Litora, parturient tincidunt quisque. Congue condimentum nibh elementum eleifend auctor ut fusce congue netus luctus. Penatibus malesuada massa dui purus odio id habitant magna nisi nascetur. Lorem hendrerit duis elit scelerisque. Vivamus mi primis nascetur ligula massa nibh convallis lacinia litora dis platea. Taciti aptent, mattis fames platea primis! Tortor non, eget sociosqu senectus fames.
-</p>
+  <script gwd-served-sizes="" type="application/json">["300x250","160x600","250x250","300x50","300x600","320x480","320x50","336x280","360x640","728x90","120x600","300x100","300x1050","320x100","320x320","360x592","375x667","468x60","800x250","970x90","970x250"]</script>
+  <gwd-google-ad id="gwd-ad" polite-load="">
+    <gwd-metric-configuration>
+      <gwd-metric-event source="gwd-taparea_1" event="tapareaexit" metric="" exit="Exit"></gwd-metric-event>
+      <gwd-metric-event source="bg-exit-L" event="tapareaexit" metric="" exit="Exit"></gwd-metric-event>
+    </gwd-metric-configuration>
+    <gwd-pagedeck class="gwd-page-container" id="pagedeck">
+      <gwd-page id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="100%" data-gwd-height="100%">
+        <div class="gwd-page-content gwd-page-size">
+          <gwd-image id="plantilla-2-p-falsa" source="assets/plantilla-2-p-falsa.jpg" scaling="stretch" class="gwd-image-c569"></gwd-image>
+          <gwd-image id="1024x600_1" source="assets/1024x600_1.jpg" scaling="stretch" class="gwd-image-1r89"></gwd-image>
+          <gwd-taparea id="bg-exit-L" class="gwd-taparea-x3rr">
+          </gwd-taparea>
+          <gwd-image id="close" source="assets/close.png" scaling="stretch" class="gwd-image-1l7r"></gwd-image>
+          <gwd-taparea id="gwd-taparea_1" class="gwd-taparea-kdzo"></gwd-taparea>
+          <div class="gwd-div-19fq"></div>
+          <p class="gwd-p-xnx2">Publicidad</p>
+        </div>
+      </gwd-page>
+    </gwd-pagedeck>
+    <gwd-exit metric="bg-exit-L" url="https://shop.samsung.com.co/?utm_source=paid_elespectador_samsung_awareness&amp;utm_medium=cheil_awareness_team_paiddisplay&amp;utm_campaign=compra-seguro_launch_cross_open_general-medium_home_general_2021-04-08_brandawareness_general&amp;utm_content=prehome_general"></gwd-exit>
+  </gwd-google-ad>
+  <script type="text/javascript" id="gwd-init-code">
+    (function() {
+      var gwdAd = document.getElementById('gwd-ad');
+
+      /**
+       * Handles the DOMContentLoaded event. The DOMContentLoaded event is
+       * fired when the document has been completely loaded and parsed.
+       */
+      function handleDomContentLoaded(event) {
+
+      }
+
+      /**
+       * Handles the WebComponentsReady event. This event is fired when all
+       * custom elements have been registered and upgraded.
+       */
+      function handleWebComponentsReady(event) {
+        // Start the Ad lifecycle.
+        setTimeout(function() {
+          gwdAd.initAd();
+        }, 0);
+      }
+
+      /**
+       * Handles the event that is dispatched after the Ad has been
+       * initialized and before the default page of the Ad is shown.
+       */
+      function handleAdInitialized(event) {}
+
+      window.addEventListener('DOMContentLoaded',
+        handleDomContentLoaded, false);
+      window.addEventListener('WebComponentsReady',
+        handleWebComponentsReady, false);
+      window.addEventListener('adinitialized',
+        handleAdInitialized, false);
+    })();
+  </script>
 </body>
+
 </html>
