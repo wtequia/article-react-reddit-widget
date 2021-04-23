@@ -30,9 +30,6 @@
         position: absolute;
         top: 0;
         left: 0;
-        -webkit-transition-property: -webkit-transform, opacity;
-        -moz-transition-property: transform, opacity;
-        transition-property: transform, opacity;
         width: 100%;
         height: -webkit-fill-available;
         right: 0;
@@ -57,10 +54,7 @@
       .ease-in *,
       .ease-out *,
       .ease *,
-      .ease-in-out * {
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-      }
+
     </style>
     <style>
       gwd-page.fs {
@@ -130,57 +124,15 @@
       }
       .gwd-page-content {
         background: white !important;
-        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-        -webkit-transform: matrix3d(
-          1,
-          0,
-          0,
-          0,
-          0,
-          1,
-          0,
-          0,
-          0,
-          0,
-          1,
-          0,
-          0,
-          0,
-          0,
-          1
-        );
-        -moz-transform: matrix3d(
-          1,
-          0,
-          0,
-          0,
-          0,
-          1,
-          0,
-          0,
-          0,
-          0,
-          1,
-          0,
-          0,
-          0,
-          0,
-          1
-        );
+      
         perspective: 1400px;
         -webkit-perspective: 1400px;
         -moz-perspective: 1400px;
-        transform-style: preserve-3d;
-        -webkit-transform-style: preserve-3d;
-        -moz-transform-style: preserve-3d;
         position: absolute;
       }
       .gwd-page-wrapper {
         background-color: #fff;
         position: absolute;
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        -moz-transform: translateZ(0);
       }
       .gwd-page-size {
         width: 100%;
@@ -209,7 +161,6 @@
         right: 18%;
         width: 5%;
         height: 7%;
-        cursor: crosshair;
       }
       .gwd-image-c569 {
         position: relative;
@@ -239,7 +190,6 @@
         position: relative;
         top: 0;
         height: 22px;
-        transform-style: preserve-3d;
         margin: 0px;
         border-image-source: none;
         border-image-width: 1;
@@ -1593,7 +1543,7 @@
           },
           F = function (a, b, c, d) {
             c =
-              "transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0," +
+              
               c +
               "," +
               d +
