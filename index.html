@@ -7,10 +7,17 @@
 <link rel="canonical" href="https://www.idiomas.elespectador.com/" />
 
 <script>
-document.title = 'ejemplo';
+console.log("url",window.location);
 var meta2 = document.createElement('meta');
 meta2.name = "description";
 meta2.content = "Cursos de idiomas en alianza con gymglish";
+if(window.location.toString().includes("wtequia")){
+document.title = 'ejemploEntro';
+var meta2 = document.createElement('meta');
+meta2.name = "description";
+meta2.content = "Cursos de idiomas en alianza con gymglish";
+
+}
 document.getElementsByTagName('head')[0].appendChild(meta2);
 </script>
 
