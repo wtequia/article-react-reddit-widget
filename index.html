@@ -7,17 +7,27 @@
 <link rel="canonical" href="https://www.idiomas.elespectador.com/" />
 
 <script>
-console.log("url",window.location);
 var meta2 = document.createElement('meta');
-meta2.name = "description";
-meta2.content = "Cursos de idiomas en alianza con gymglish";
-if(window.location.toString().includes("wtequia")){
-document.title = 'ejemploEntro';
-var meta2 = document.createElement('meta');
-meta2.name = "description";
-meta2.content = "Cursos de idiomas en alianza con gymglish";
-
+var metatitle = 'Idiomas';
+metaDescription.name = "description";
+metaDescription.content = "Cursos de idiomas en alianza con gymglish";
+if(window.location.toString().includes("es/gymglish")){
+metatitle = 'Cursos de inglés virtuales gratis | Aprender inglés';
+metaDescription.content = "Aprende ingles rápido, fácil y fluido desde cero con los mejores cursos personalizados en línea/ virtuales certificados";
 }
+if(window.location.toString().includes("es/wunderbla")){
+metatitle = 'Cursos gratis para aprender idioma alemán | Aprender alemán';
+metaDescription.content = "Aprende alemán gratis y desde cero con los mejores cursos y clases en línea";
+}
+if(window.location.toString().includes("es/frantastique")){
+metatitle = 'Cursos gratis para aprender Frances | Aprender francés';
+metaDescription.content = "Aprende francés rápido con los mejores cursos para principiantes y avanzados | Cursos online | Cursos personalizados";
+}
+if(window.location.toString().includes("wtequia")){
+metatitle = 'Learn spanish with virtual courses for free | teachers online';
+metaDescription.content = "Do you want to learn Spanish? Learn spanish fast with the best free online courses, teachers and programs online | Spanish lessons";
+}
+document.title = metatitle;
 document.getElementsByTagName('head')[0].appendChild(meta2);
 </script>
 
