@@ -96,6 +96,20 @@ t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'scrip
 
   gtag('config', 'UA-1393162-1');
 </script>
+	
+<script>
+const p = document.querySelector('iframe');
+p.onmouseover = logMouseOver;
+p.onmouseout = logMouseOut;
+
+function logMouseOver() {
+ p.style.pointerEvents = 'all'
+}
+
+function logMouseOut() {
+ p.style.pointerEvents = 'all'
+}
+</script>
 <!-- TradeDoubler site verification 3230022 -->
 
 
@@ -278,6 +292,7 @@ t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'scrip
     background: transparent;
     margin: 0;
     border: 0;
+    pointer-events: none;
 	}
 </style>
 
