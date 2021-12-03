@@ -1043,11 +1043,11 @@ document.getElementById("iframe").onmouseover = function() {mouseOver()};
 document.getElementById("iframe").onmouseout = function() {mouseOut()};
 
 function mouseOver() {
-  document.getElementById("iframe").style.visibility = "hidden";
+  document.getElementById("iframe").style.pointerEvents = '100vh';
 }
 
 function mouseOut() {
-  document.getElementById("iframe").style.visibility = "initial";
+  document.getElementById("iframe").style.pointerEvents = 'auto';
 }
 </script>
 
