@@ -1039,6 +1039,18 @@ function logMouseOut() {
 		console.log("mouse fuera");
 }
 </script>
+	  <script>
+document.getElementById("iframe").onmouseover = function() {mouseOver()};
+document.getElementById("iframe").onmouseout = function() {mouseOut()};
+
+function mouseOver() {
+  document.getElementById("iframe").style.visibility = "hidden";
+}
+
+function mouseOut() {
+  document.getElementById("iframe").style.visibility = "initial";
+}
+</script>
 
 </body>
 </html>
