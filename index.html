@@ -97,24 +97,7 @@ t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'scrip
   gtag('config', 'UA-1393162-1');
 </script>
 	
-<script>
-const p = document.querySelector('iframe');
-	console.log("p", p);
-p.onmouseover = logMouseOver;
-p.onmouseout = logMouseOut;
 
-function logMouseOver() {
- p.style.pointerEvents = 'all'
-p.style.pointerEvents = '100vh'
-	console.log("mouse encima");
-}
-
-function logMouseOut() {
- p.style.pointerEvents = 'all'
-	p.style.pointerEvents = '100vh'
-		console.log("mouse fuera");
-}
-</script>
 <!-- TradeDoubler site verification 3230022 -->
 
 
@@ -1037,7 +1020,24 @@ A9n.currentUserId = '';
 </script>
 
 <script src="https://d2zajjwhe6xaiy.cloudfront.net/assets/application-ce89579ad7b59b85e692aa938521cd9a2d2c7cc19bae5584b090f754ad9fc598.js" async="async"></script>
+<script>
+const p = document.querySelector('iframe');
+	console.log("p", p);
+p.onmouseover = logMouseOver;
+p.onmouseout = logMouseOut;
 
+function logMouseOver() {
+ p.style.pointerEvents = 'all'
+p.style.pointerEvents = '100vh'
+	console.log("mouse encima");
+}
+
+function logMouseOut() {
+ p.style.pointerEvents = 'all'
+	p.style.pointerEvents = '100vh'
+		console.log("mouse fuera");
+}
+</script>
 
 </body>
 </html>
