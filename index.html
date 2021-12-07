@@ -342,7 +342,7 @@ Esta web utiliza cookies para mejorar tu experiencia de navegación y realizar t
 </div>
 </div>
 	<div id="iframe">
-<iframe src= "https://elespectador-el-espectador-sandbox.cdn.arcpublishing.com/header" class = 'iframe'  allowtransparency="true" frameborder="0" ></iframe>
+<iframe id="iframe2" src= "https://elespectador-el-espectador-sandbox.cdn.arcpublishing.com/header" class = 'iframe'  allowtransparency="true" frameborder="0" ></iframe>
 	</div>
 <div class='container-fluid header' id='page-header'>
 <nav class='nav_header' style='width: 100%'>
@@ -1041,6 +1041,8 @@ function logMouseOut() {
 <script>
 document.getElementById("iframe").onmouseover = function() {mouseOver()};
 document.getElementById("iframe").onmouseout = function() {mouseOut()};
+document.getElementById("iframe").contentWindow.document.body.getElementById("iframe2").getElementsByClassName("Header-TopBarAside").setAttribute("style", "background:'#f00';"
+	document.getElementById("iframe").onmouseout = function() {mouseOut()};
 
 function mouseOver() {
   document.getElementById("iframe").style.pointerEvents = '100vh';
