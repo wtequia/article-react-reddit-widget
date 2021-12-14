@@ -1026,7 +1026,7 @@ const p2 = document.getElementById('iframe2');
 	console.log("p", p);
 p.onmouseover = logMouseOver;
 p.onmouseout = logMouseOut;
-p.onclick = clicked;
+p2.onclick = clicked;
 
 function logMouseOver() {
  p2.style.pointerEvents = 'all'
@@ -1048,7 +1048,7 @@ function clicked() {
 <script>
 document.getElementById("iframe").onmouseover = function() {mouseOver()};
 document.getElementById("iframe").onmouseout = function() {mouseOut()};
-	document.getElementById("iframe").onClick = function() {clicked()};
+	document.getElementById("iframe").onClick = function() {clicked2()};
 document.getElementById("iframe").contentWindow.document.body.getElementById("iframe2").getElementsByClassName("Header-TopBarAside").setAttribute("style", "background:'#f00';"
 	document.getElementById("iframe").onmouseout = function() {mouseOut()};
 
@@ -1058,6 +1058,11 @@ function mouseOver() {
 
 function mouseOut() {
   document.getElementById("iframe").style.pointerEvents = 'auto';
+}
+	function clicked2() {
+		console.log("click");
+	const p = document.getElementsByClassName('Menu-Container');
+	console.log("Elemento menu", p);
 }
 </script>
 
