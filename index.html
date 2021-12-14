@@ -1026,6 +1026,7 @@ const p2 = document.getElementById('iframe2');
 	console.log("p", p);
 p.onmouseover = logMouseOver;
 p.onmouseout = logMouseOut;
+p.onclick = clicked;
 
 function logMouseOver() {
  p2.style.pointerEvents = 'all'
@@ -1037,6 +1038,11 @@ function logMouseOut() {
  p2.style.pointerEvents = 'all'
 	p2.style.height = 'auto'
 		console.log("mouse fuera");
+}
+function clicked() {
+		console.log("click");
+	const p = document.getElementsByClassName('Menu-Container');
+	console.log("Elemento menu", p);
 }
 </script>
 <script>
