@@ -1071,6 +1071,13 @@ function mouseOut() {
     alert('Hello world');
 		console.log("hola click")
 }
+var iframe = document.getElementById('iframe2');
+iframe.contentWindow.body.addEventListener('click', Handler);
+
+function Handler() {
+    alert('works');
+}
+	
 </script>
 
 </body>
