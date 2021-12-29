@@ -100,7 +100,7 @@ document.getElementById('prueba3').innerHTML =`
       href="/_next/static/chunks/pages/index-ec80f7670334cb4f4f86.js"
       as="script"
     />`;
-document.getElementById('prueba1').innerHTML =`
+document.getElementById('prueba4').innerHTML =`
                    <div>
           <header class="Header undefined null null">
             <div class="Header-TopBar false false">
@@ -831,7 +831,7 @@ document.getElementById('prueba3').innerHTML =`
       href="/_next/static/chunks/pages/index-ec80f7670334cb4f4f86.js"
       as="script"
     />`;
-document.getElementById('prueba4').innerHTML =`
+document.getElementById('prueba1').innerHTML =`
                    <div>
           <header class="Header undefined null null">
             <div class="Header-TopBar false false">
