@@ -1,4 +1,7 @@
 console.log("esto es una prueba");
+window.addEventListener('load', (event) => {
+    console.log('The page has fully loaded');
+
 document.getElementById('prueba3').innerHTML =`
             <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
@@ -100,6 +103,7 @@ document.getElementById('prueba3').innerHTML =`
       href="/_next/static/chunks/pages/index-ec80f7670334cb4f4f86.js"
       as="script"
     />`;
+ });
 document.getElementById('prueba1').innerHTML =`
                    <div>
           <header class="Header undefined null null">
