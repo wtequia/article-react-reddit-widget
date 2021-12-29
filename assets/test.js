@@ -103,7 +103,8 @@ document.getElementById('prueba3').innerHTML =`
       href="/_next/static/chunks/pages/index-ec80f7670334cb4f4f86.js"
       as="script"
     />`;
-  document.getElementById('prueba4').innerHTML =`
+ });
+ document.getElementById('prueba4').innerHTML =`
                    <script id="__NEXT_DATA__" type="application/json">
       {
         "props": { "pageProps": {} },
@@ -246,7 +247,6 @@ document.getElementById('prueba3').innerHTML =`
       src="/_next/static/3rmx0no0UKelBbm2Xx0FZ/_ssgManifest.js"
       async=""
     ></script>`;
- });
 document.getElementById('prueba1').innerHTML =`
                    <div>
           <header class="Header undefined null null">
