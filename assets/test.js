@@ -1,4 +1,104 @@
 console.log("esto es una prueba");
+document.getElementById('prueba3').innerHTML +=`
+           <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://use.typekit.net/fri7zxf.css" />
+    <link as="style" href="https://use.typekit.net/fri7zxf.css" rel="preload" />
+    <link href="https://use.typekit.net/fri7zxf.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://use.typekit.net/fri7zxf.css" />
+    <link as="style" href="https://use.typekit.net/fri7zxf.css" rel="preload" />
+    <link href="https://use.typekit.net/fri7zxf.css" rel="stylesheet" />
+    <link
+      rel="preload"
+      href="//www.googletagservices.com/tag/js/gpt.js"
+      as="script"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900&amp;display=swap"
+      crossorigin="true"
+    />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900&amp;display=swap"
+      crossorigin="true"
+      rel="preload"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900&amp;display=swap"
+      crossorigin="true"
+      rel="stylesheet"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/css/3b9f23e1af39fbc4acfe.css"
+      as="style"
+    />
+    <link
+      rel="stylesheet"
+      href="/_next/static/css/3b9f23e1af39fbc4acfe.css"
+      data-n-g=""
+    />
+    <link
+      rel="preload"
+      href="/_next/static/css/0386f00a4889cda1ae90.css"
+      as="style"
+    />
+    <link
+      rel="stylesheet"
+      href="/_next/static/css/0386f00a4889cda1ae90.css"
+      data-n-g=""
+    />
+    <link
+      rel="preload"
+      href="/_next/static/css/afd7172b7cfc566ac23d.css"
+      as="style"
+    />
+    <link
+      rel="stylesheet"
+      href="/_next/static/css/afd7172b7cfc566ac23d.css"
+      data-n-p=""
+    />
+    <noscript data-n-css="true"></noscript>
+    <link
+      rel="preload"
+      href="/_next/static/chunks/main-8882a29c3103fafc7a90.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/chunks/webpack-e067438c4cf4ef2ef178.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/chunks/framework.964e76377795026233d5.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/chunks/3e86aeee.8f6f5b95f5e92b2c9bcd.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/chunks/f6078781a05fe1bcb0902d23dbbb2662c8d200b3.4d89b26d8f9db9c47996.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/chunks/pages/_app-87841a490e683ade5b06.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/chunks/d1ac1aa7.907f74cea2e200ec9559.js"
+      as="script"
+    />
+    <link
+      rel="preload"
+      href="/_next/static/chunks/pages/index-ec80f7670334cb4f4f86.js"
+      as="script"/>`;
 document.getElementById('prueba1').innerHTML +=`
           <div>
           <header class="Header undefined null null">
@@ -629,3 +729,146 @@ document.getElementById('prueba2').innerHTML += `<div>
             </div>
           </div>
         </div>`;
+document.getElementById('prueba4').innerHTML +=`
+        <script id="__NEXT_DATA__" type="application/json">
+      {
+        "props": { "pageProps": {} },
+        "page": "/",
+        "query": {},
+        "buildId": "PGsRTPwZogglTPNITX7ig",
+        "nextExport": true,
+        "autoExport": true,
+        "isFallback": false,
+        "head": [
+          ["meta", { "name": "viewport", "content": "width=device-width" }],
+          ["meta", { "charSet": "utf-8" }],
+          [
+            "link",
+            {
+              "rel": "preconnect",
+              "href": "https://use.typekit.net/fri7zxf.css",
+              "crossOrigin": true
+            }
+          ],
+          [
+            "link",
+            {
+              "as": "style",
+              "href": "https://use.typekit.net/fri7zxf.css",
+              "crossOrigin": true,
+              "rel": "preload"
+            }
+          ],
+          [
+            "link",
+            {
+              "href": "https://use.typekit.net/fri7zxf.css",
+              "crossOrigin": true,
+              "rel": "stylesheet"
+            }
+          ],
+          [
+            "link",
+            {
+              "rel": "preconnect",
+              "href": "https://use.typekit.net/fri7zxf.css",
+              "crossOrigin": true
+            }
+          ],
+          [
+            "link",
+            {
+              "as": "style",
+              "href": "https://use.typekit.net/fri7zxf.css",
+              "crossOrigin": true,
+              "rel": "preload"
+            }
+          ],
+          [
+            "link",
+            {
+              "href": "https://use.typekit.net/fri7zxf.css",
+              "crossOrigin": true,
+              "rel": "stylesheet"
+            }
+          ],
+          [
+            "link",
+            {
+              "rel": "preload",
+              "href": "//www.googletagservices.com/tag/js/gpt.js",
+              "as": "script"
+            }
+          ],
+          [
+            "link",
+            {
+              "rel": "preconnect",
+              "href": "https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900\u0026display=swap",
+              "crossOrigin": "true"
+            }
+          ],
+          [
+            "link",
+            {
+              "as": "style",
+              "href": "https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900\u0026display=swap",
+              "crossOrigin": "true",
+              "rel": "preload"
+            }
+          ],
+          [
+            "link",
+            {
+              "href": "https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900\u0026display=swap",
+              "crossOrigin": "true",
+              "rel": "stylesheet"
+            }
+          ]
+        ]
+      }
+    </script>
+    <script
+      nomodule=""
+      src="/_next/static/chunks/polyfills-62819d968fe7fef20a2c.js"
+    ></script>
+    <script
+      src="/_next/static/chunks/main-8882a29c3103fafc7a90.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/chunks/webpack-e067438c4cf4ef2ef178.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/chunks/framework.964e76377795026233d5.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/chunks/3e86aeee.8f6f5b95f5e92b2c9bcd.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/chunks/f6078781a05fe1bcb0902d23dbbb2662c8d200b3.4d89b26d8f9db9c47996.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/chunks/pages/_app-87841a490e683ade5b06.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/chunks/d1ac1aa7.907f74cea2e200ec9559.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/chunks/pages/index-ec80f7670334cb4f4f86.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/PGsRTPwZogglTPNITX7ig/_buildManifest.js"
+      async=""
+    ></script>
+    <script
+      src="/_next/static/PGsRTPwZogglTPNITX7ig/_ssgManifest.js"
+      async=""
+    ></script>`;
