@@ -1,5 +1,6 @@
 console.log("esto es una prueba");
-document.getElementById('prueba1').innerHTML += '        <div>
+document.getElementById('prueba1').innerHTML +=`
+          <div>
           <header class="Header undefined null null">
             <div class="Header-TopBar false false">
               <div class="Header-TopBarMain false false">
@@ -276,8 +277,8 @@ document.getElementById('prueba1').innerHTML += '        <div>
             </div>
             <div class="Container"></div>
           </header>
-        </div>';
-document.getElementById('prueba2').innerHTML += '  <div>
+        </div>`;
+document.getElementById('prueba2').innerHTML += `<div>
           <div class="Footer-Container">
             <div class="Footer Footer-Header Footer-Header_article">
               <div class="Footer-Logo">
@@ -627,4 +628,4 @@ document.getElementById('prueba2').innerHTML += '  <div>
               </div>
             </div>
           </div>
-        </div>';
+        </div>`;
