@@ -101,11 +101,7 @@ document.getElementById('prueba3').innerHTML +=`
       as="script"
     />`;
 document.getElementById('prueba1').innerHTML +=`
-          <script
-          defer=""
-          src="https://cse.google.com/cse.js?cx=017091391673859193212:uanm1slcg33"
-        ></script>
-        <div>
+              <div>
           <header class="Header undefined null null">
             <div class="Header-TopBar false false">
               <div class="Header-TopBarMain false false">
