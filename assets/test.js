@@ -1,6 +1,6 @@
 console.log("esto es una prueba");
 document.getElementById('prueba3').innerHTML +=`
-           <meta name="viewport" content="width=device-width" />
+            <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
     <link rel="preconnect" href="https://use.typekit.net/fri7zxf.css" />
     <link as="style" href="https://use.typekit.net/fri7zxf.css" rel="preload" />
@@ -98,9 +98,14 @@ document.getElementById('prueba3').innerHTML +=`
     <link
       rel="preload"
       href="/_next/static/chunks/pages/index-ec80f7670334cb4f4f86.js"
-      as="script"/>`;
+      as="script"
+    />`;
 document.getElementById('prueba1').innerHTML +=`
-          <div>
+          <script
+          defer=""
+          src="https://cse.google.com/cse.js?cx=017091391673859193212:uanm1slcg33"
+        ></script>
+        <div>
           <header class="Header undefined null null">
             <div class="Header-TopBar false false">
               <div class="Header-TopBarMain false false">
@@ -371,14 +376,14 @@ document.getElementById('prueba1').innerHTML +=`
                           d="M0 323.738c-0 0.004-0 0.009-0 0.014 0 11.648 4.715 22.195 12.34 29.836l-0.001-0.001 348.16 348.16c40.697 40.62 96.877 65.738 158.925 65.738s118.228-25.119 158.928-65.742l-0.003 0.003 348.16-348.16c8.051-7.696 13.055-18.521 13.055-30.514 0-23.3-18.889-42.189-42.189-42.189-11.993 0-22.818 5.005-30.499 13.039l-0.015 0.016-348.16 348.16c-25.445 25.366-60.555 41.049-99.328 41.049s-73.883-15.684-99.332-41.053l0.004 0.004-348.16-348.16c-7.631-7.615-18.165-12.323-29.798-12.323-23.277 0-42.151 18.85-42.189 42.118l-0 0.004z"
                         ></path>
                       </svg></div
-                  ></span>
+                      ></span>
                 </div>
               </div>
             </div>
             <div class="Container"></div>
           </header>
         </div>`;
-document.getElementById('prueba2').innerHTML += `<div>
+document.getElementById('prueba2').innerHTML += `  <div>
           <div class="Footer-Container">
             <div class="Footer Footer-Header Footer-Header_article">
               <div class="Footer-Logo">
@@ -730,12 +735,12 @@ document.getElementById('prueba2').innerHTML += `<div>
           </div>
         </div>`;
 document.getElementById('prueba4').innerHTML +=`
-        <script id="__NEXT_DATA__" type="application/json">
+     <script id="__NEXT_DATA__" type="application/json">
       {
         "props": { "pageProps": {} },
         "page": "/",
         "query": {},
-        "buildId": "PGsRTPwZogglTPNITX7ig",
+        "buildId": "3rmx0no0UKelBbm2Xx0FZ",
         "nextExport": true,
         "autoExport": true,
         "isFallback": false,
@@ -865,10 +870,10 @@ document.getElementById('prueba4').innerHTML +=`
       async=""
     ></script>
     <script
-      src="/_next/static/PGsRTPwZogglTPNITX7ig/_buildManifest.js"
+      src="/_next/static/3rmx0no0UKelBbm2Xx0FZ/_buildManifest.js"
       async=""
     ></script>
     <script
-      src="/_next/static/PGsRTPwZogglTPNITX7ig/_ssgManifest.js"
+      src="/_next/static/3rmx0no0UKelBbm2Xx0FZ/_ssgManifest.js"
       async=""
     ></script>`;
