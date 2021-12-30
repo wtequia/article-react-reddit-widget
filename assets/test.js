@@ -1,8 +1,7 @@
 console.log("esto es una prueba");
 
 document.getElementById('headerDiv').innerHTML =`
-    <div id="__next">
-    </div>
+
        <script id="__NEXT_DATA__" type="application/json">
       {
         "props": { "pageProps": {} },
