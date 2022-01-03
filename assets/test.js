@@ -1,11 +1,7 @@
 console.log("esto es una prueba");
 
 document.getElementById('headerDiv').innerHTML =`
-
-    <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width" />
+   <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
     <link rel="preconnect" href="https://use.typekit.net/fri7zxf.css" />
     <link as="style" href="https://use.typekit.net/fri7zxf.css" rel="preload" />
@@ -110,8 +106,6 @@ document.getElementById('headerDiv').innerHTML =`
       href="/_next/static/chunks/pages/index-702daf3909c845367da0.js"
       as="script"
     />
-  </head>
-  <body>
     <div id="__next">
       <div>
         <script
@@ -544,8 +538,6 @@ document.getElementById('headerDiv').innerHTML =`
       src="/_next/static/yZGT6WCLGyrEGVnyx1e4j/_ssgManifest.js"
       async=""
     ></script>
-  </body>
-</html>
   `;
 
 document.getElementById('prueba2').innerHTML = `  <div>
