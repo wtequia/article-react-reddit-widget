@@ -432,14 +432,7 @@ document.getElementById('headerDiv').innerHTML =`
       src="/_next/static/chunks/pages/index-702daf3909c845367da0.js"
       async=""
     ></script>
-    <script
-      src="/_next/static/yZGT6WCLGyrEGVnyx1e4j/_buildManifest.js"
-      async=""
-    ></script>
-    <script
-      src="/_next/static/yZGT6WCLGyrEGVnyx1e4j/_ssgManifest.js"
-      async=""
-    ></script>
+
   `;
 
 document.getElementById('prueba2').innerHTML = `  <div>
