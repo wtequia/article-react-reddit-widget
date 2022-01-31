@@ -106,7 +106,11 @@ document.getElementById('headerDiv').innerHTML =`
       href="/_next/static/chunks/pages/index-702daf3909c845367da0.js"
       as="script"
     />
-    <div id="__next">
+ 
+
+  `;
+
+document.getElementById('prueba2').innerHTML = `    <div id="__next">
       <div>
         <script
           defer=""
@@ -392,10 +396,4 @@ document.getElementById('headerDiv').innerHTML =`
         </div>
       </div>
     </div>
-
-
-  `;
-
-document.getElementById('prueba2').innerHTML = `  <div>
-        hola2
-        </div>`;
+`;
