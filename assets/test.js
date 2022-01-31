@@ -110,7 +110,7 @@ document.getElementById('headerDiv').innerHTML =`
 
   `;
 
-document.getElementById('prueba2').innerHTML = `    <div id="__next">
+document.getElementById('prueba2').innerHTML = `    
       <div>
         <script
           defer=""
@@ -395,5 +395,4 @@ document.getElementById('prueba2').innerHTML = `    <div id="__next">
           </header>
         </div>
       </div>
-    </div>
 `;
