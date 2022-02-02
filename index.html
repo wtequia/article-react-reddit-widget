@@ -1,86 +1,38 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Developer Quiz</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <!-- 
+      Here's an example of how we'd allow others to use the React Widget we made
+      We would provide our customers with instructions. 
+      For example:
+
+      "Copy these 3 lines of code and replace SUBREDDIT_HERE with the subreddit of your liking"
+        <div class="reddit_widget" data-subreddit="SUBREDDIT_HERE"></div>
+        <link href="https://giologist.github.io/article-react-reddit-widget/index.css" rel="stylesheet" />
+        <script src="https://giologist.github.io/article-react-reddit-widget/index.js"></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js" charset="utf-8"></script>
+    -->
 
-    <style>
-        .quiz {
-            display: block;
-            background: linear-gradient(to bottom, #2a86d6 0%,#7db9e8 100%);
-            padding: 40px;
-            color: #ffffff;
-        }
+    <!--
+    When using your widget, you want to give people the chance to resize it to their needs
+    -->
 
-        .quiz button {
-            display: block;
-            margin-bottom: 10px;
-            color: #000000;
-        }
+    <!-- Here's an example of how others can set their own styling -->
+    <div style="margin: 100px auto; max-width: 400px;">
+      <div class="reddit_widget" data-subreddit="javascript"></div>
+    </div>
 
-        .quiz .correct {
-            background-color: #ffffff;
-            padding: 5px;
-            color: #11AF08;
-            font-weight: bold;
-        }
+    <!-- Or leave the constraints completely up to the react app -->
+    <div class="reddit_widget" data-subreddit="reactjs"></div>
 
-        .quiz .incorrect {
-            background-color: #ffffff;
-            padding: 5px;
-            color: #FF0C0C;
-            font-weight: bold;
-        }
-    </style>
-
-    <script type="text/babel">
-    class Quiz extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                correct: null
-            };
-        }
-
-        answer(correct) {
-            this.setState({
-                correct
-            });
-        }
-
-        render() {
-            let question = null;
-            if (this.state.correct === null) {
-                question = <div>
-                    <button onClick={() => this.answer(false)}>a) A graph database query language</button>
-                    <button onClick={() => this.answer(true)}>b) An API query language</button>
-                    <button onClick={() => this.answer(false)}>c) A graph drawing API</button>
-                </div>;
-            }
-            let answer = null;
-            if (this.state.correct === true) {
-                answer = <div className="correct">Correct! It is an API query language</div>;
-            } else if (this.state.correct === false) {
-                answer = <div className="incorrect">Nope! It's actually an API query language</div>;
-            }
-
-            return <div className="quiz">
-                <p>What is GraphQL?</p>
-                {question}
-                {answer}
-            </div>;
-        }
-    }
-    ReactDOM.render(
-        <Quiz />,
-        document.getElementById('quiz')
-    );
-    </script>
-</head>
-<body>
-    <div id="quiz"></div>
-</body>
+    <!-- Below are the JS and CSS files that people will include when using our widget -->
+    <link href="https://giologist.github.io/article-react-reddit-widget/index.css" rel="stylesheet" />
+    <script src="https://giologist.github.io/article-react-reddit-widget/index.js"></script>
+  </body>
 </html>
