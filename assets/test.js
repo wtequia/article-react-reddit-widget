@@ -1,112 +1,82 @@
 console.log("esto es una prueba");
 
 document.getElementById('headerDiv').innerHTML =`
-   <meta name="viewport" content="width=device-width" />
-    <meta charset="utf-8" />
-    <link rel="preconnect" href="https://use.typekit.net/fri7zxf.css" />
-    <link as="style" href="https://use.typekit.net/fri7zxf.css" rel="preload" />
-    <link href="https://use.typekit.net/fri7zxf.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://use.typekit.net/fri7zxf.css" />
-    <link as="style" href="https://use.typekit.net/fri7zxf.css" rel="preload" />
-    <link href="https://use.typekit.net/fri7zxf.css" rel="stylesheet" />
-    <link
-      rel="preload"
-      href="//www.googletagservices.com/tag/js/gpt.js"
-      as="script"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900&amp;display=swap"
-      crossorigin="true"
-    />
-    <link
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900&amp;display=swap"
-      crossorigin="true"
-      rel="preload"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,900&amp;display=swap"
-      crossorigin="true"
-      rel="stylesheet"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/css/3b9f23e1af39fbc4acfe.css"
-      as="style"
-    />
-    <link
-      rel="stylesheet"
-      href="/_next/static/css/3b9f23e1af39fbc4acfe.css"
-      data-n-g=""
-    />
-    <link
-      rel="preload"
-      href="/_next/static/css/0386f00a4889cda1ae90.css"
-      as="style"
-    />
-    <link
-      rel="stylesheet"
-      href="/_next/static/css/0386f00a4889cda1ae90.css"
-      data-n-g=""
-    />
-    <link
-      rel="preload"
-      href="/_next/static/css/afd7172b7cfc566ac23d.css"
-      as="style"
-    />
-    <link
-      rel="stylesheet"
-      href="/_next/static/css/afd7172b7cfc566ac23d.css"
-      data-n-p=""
-    />
-    <noscript data-n-css="true"></noscript>
-    <link
-      rel="preload"
-      href="/_next/static/chunks/main-c96340488a2a83a62d07.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/webpack-e067438c4cf4ef2ef178.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/framework.964e76377795026233d5.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/3e86aeee.ff5578978733a40a67a3.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/f6078781a05fe1bcb0902d23dbbb2662c8d200b3.34a880cd93b71b6c37f4.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/pages/_app-3f8f5c4f084b3a108433.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/d1ac1aa7.8dd2bcc10e300262580a.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/8bf380cd5dec50c9cd192153689475ed8b036d6c.b67d4c2f8ac8c14da9e5.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="/_next/static/chunks/pages/index-702daf3909c845367da0.js"
-      as="script"
-    />
- 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js" charset="utf-8"></script>
+
+    <style>
+        .quiz {
+            display: block;
+            background: linear-gradient(to bottom, #2a86d6 0%,#7db9e8 100%);
+            padding: 40px;
+            color: #ffffff;
+        }
+
+        .quiz button {
+            display: block;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .quiz .correct {
+            background-color: #ffffff;
+            padding: 5px;
+            color: #11AF08;
+            font-weight: bold;
+        }
+
+        .quiz .incorrect {
+            background-color: #ffffff;
+            padding: 5px;
+            color: #FF0C0C;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/babel">
+    class Quiz extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                correct: null
+            };
+        }
+
+        answer(correct) {
+            this.setState({
+                correct
+            });
+        }
+
+        render() {
+            let question = null;
+            if (this.state.correct === null) {
+                question = <div>
+                    <button onClick={() => this.answer(false)}>a) A graph database query language</button>
+                    <button onClick={() => this.answer(true)}>b) An API query language</button>
+                    <button onClick={() => this.answer(false)}>c) A graph drawing API</button>
+                </div>;
+            }
+            let answer = null;
+            if (this.state.correct === true) {
+                answer = <div className="correct">Correct! It is an API query language</div>;
+            } else if (this.state.correct === false) {
+                answer = <div className="incorrect">Nope! It's actually an API query language</div>;
+            }
+
+            return <div className="quiz">
+                <p>What is GraphQL?</p>
+                {question}
+                {answer}
+            </div>;
+        }
+    }
+    ReactDOM.render(
+        <Quiz />,
+        document.getElementById('quiz')
+    );
+    </script>
 
   `;
 
