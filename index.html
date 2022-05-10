@@ -3,32 +3,22 @@
     <head>
         <link rel="icon" type="image/png" href="/favicon.png">
         <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
-        <script async src='https://raw.githubusercontent.com/wtequia/article-react-reddit-widget/master/prebid6.23.0.js'></script>
+        <script async src="//cdn.jsdelivr.net/npm/prebid.js@latest/dist/not-for-prod/prebid.js"></script>
         <script>
-            var div_1_sizes =   [
-        [970, 250],
-        [1000, 250],
-        [1200, 250],
-        [320, 100],
-        [300, 100],
-        [320, 160]
-      ];
+            var div_1_sizes = [
+                [300, 250],
+                [300, 600]
+            ];
             var div_2_sizes = [
-        [300, 600],
-        [320, 600],
-        [360, 600],
-        [336, 280],
-        [300, 250],
-        [320, 100]
-      ];
-            let teadsPlacement = 134841;
-            let teadsPage = 119437;
+                [728, 90],
+                [970, 250]
+            ];
             var PREBID_TIMEOUT = 1000;
             var FAILSAFE_TIMEOUT = 3000;
 
             var adUnits = [
                 {
-                    code: '/21955072735/elespectador-arc/home',
+                    code: '/19968336/header-bid-tag-0',
                     mediaTypes: {
                         banner: {
                             sizes: div_1_sizes
@@ -42,7 +32,7 @@
                     }]
                 },
                 {
-                    code: '/19968336/header-bid-tag-0',
+                    code: '/19968336/header-bid-tag-1',
                     mediaTypes: {
                         banner: {
                             sizes: div_2_sizes
@@ -53,14 +43,7 @@
                         params: {
                             placementId: 13144370
                         }
-                    },
-                           {
-            bidder: 'teads',
-            params: {
-              placementId: teadsPlacement,
-              pageId: teadsPlacement,
-            },
-          },]
+                    }]
                 }
             ];
 
@@ -98,12 +81,12 @@
             }, FAILSAFE_TIMEOUT);
 
             googletag.cmd.push(function() {
-                googletag.defineSlot('/21955072735/elespectador-arc/home', div_1_sizes, 'div-1').addService(googletag.pubads());
+                googletag.defineSlot('/19968336/header-bid-tag-0', div_1_sizes, 'div-1').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.enableServices();
             });
             googletag.cmd.push(function() {
-                googletag.defineSlot('/19968336/header-bid-tag-0', div_2_sizes, 'div-2').addService(googletag.pubads());
+                googletag.defineSlot('/19968336/header-bid-tag-1', div_2_sizes, 'div-2').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.enableServices();
             });
