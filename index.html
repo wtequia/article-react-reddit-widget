@@ -13,7 +13,7 @@
                 [728, 90],
                 [970, 250]
             ];
-            var PREBID_TIMEOUT = 1000;
+
             var FAILSAFE_TIMEOUT = 3000;
 
             var adUnits = [
@@ -61,7 +61,6 @@
                 pbjs.addAdUnits(adUnits);
                 pbjs.requestBids({
                     bidsBackHandler: initAdserver,
-                    timeout: PREBID_TIMEOUT
                 });
             });
 
