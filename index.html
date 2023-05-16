@@ -1,125 +1,752 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,minimum-scale=1,initial-scale=1"
-    />
-    <link rel="canonical" href="." />
-    <title>Showcase article with server-side paywall</title>
+<html lang="en"><head>
+  <base href="/">
+  <title>[GTech Demo] Subscribe with Google</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/v35095b53655653106712feb44f96c6929ce012ae38486ad7db1de265cbd9b7ec/developers/images/favicon.png">
 
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Playfair+Display"
-      type="text/css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Muli"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
-      type="text/css"
-    />
-    <link rel="stylesheet" href="/styles.css" type="text/css" />
-    <link rel="icon" type="image/png" href="/icons/icon-2x.png" />
-    <meta name="theme-color" content="#37dc8c" />
-    <link rel="apple-touch-icon" href="/icons/icon-2x.png" />
-    <meta name="msapplication-TileImage" content="/icons/icon-2x.png" />
-    <meta name="msapplication-TileColor" content="#37dc8c" />
+  <!-- Noto Sans and Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+JP|Noto+Sans+KR|Noto+Sans+TC|Noto+Serif|Noto+Serif+JP|Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap">
 
-    <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "NewsArticle",
-        "headline": "Article title",
-        "image": "https://scenic-2017.appspot.com/icons/icon-2x.png",
-        "datePublished": "2025-02-05T08:00:00+08:00",
-        "dateModified": "2025-02-05T09:20:00+08:00",
-        "author": {
-          "@type": "Person",
-          "name": "John Doe"
-        },
-        "publisher": {
-          "name": "<% config.name %>",
-          "@type": "Organization",
-          "@id": "scenic-2017.appspot.com",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://scenic-2017.appspot.com/icons/icon-2x.png"
-          }
-        },
-        "description": "A most wonderful article",
-        "isAccessibleForFree": "False",
-        "isPartOf": {
-          "@type": ["CreativeWork", "Product"],
-          "name": "Scenic News",
-          "productID": "<% config.publicationId %>:news"
-        }
-      }
-    </script>
-    <script src="<% swgGaaJsUrl %>"></script>
-    <script async subscriptions-control="manual" src="<% swgJsUrl %>"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-  </head>
-  <body>
-    <div class="main-body">
-      <header>
-        <a class="brand-header" href="/">
-          <div class="brand-logo"></div>
-          <div class="brand-name"><% config.name %></div>
-        </a>
-      </header>
+  <!-- Material Design [unpkg.com belongs to Google and many devs are using it in g3, maybe we can ignore the error messages] -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
-      <main role="main">
-        <div class="container">
-          <h1 class="heading">Showcase article with server-side paywall</h1>
-          <div class="hr"></div>
+  <!-- Prettify.css -->
+  <link href="https://www.gstatic.com/external_hosted/prettify/skins/sunburst.min.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/external_hosted/google_code_prettify/prettify_compiled.js"></script>
 
-          <!-- Free paragraph -->
-          <p class="text">
-            This is the intro paragraph. You can read this paragraph even
-            without entitlements to the article.
-          </p>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-          <!-- Paid paragraph. Only users with a Showcase entitlement see this. -->
-          <%# showcaseEntitlementJwt %>
-          <p class="text">
-            🎉 This is the paywalled paragraph. If you're reading this, you have
-            a Showcase entitlement. Congrats!
-          </p>
-          <div class="hr"></div>
-          <%/ showcaseEntitlementJwt %>
+  <!-- Bootstrap hosted on gStatic -->
+	<script src="https://www.gstatic.com/external_hosted/twitter_bootstrap/v4/js/bootstrap.min.js"></script>
+  <link href="https://www.gstatic.com/external_hosted/twitter_bootstrap_css/v4/bootstrap.css" rel="stylesheet">
 
-          <!-- Paywall. Only users WITHOUT a Showcase entitlement see this. -->
-          <%^ showcaseEntitlementJwt %>
-          <p class="text">
-            <strong>🔒 Register to read more.</strong>
-          </p>
-          <%/ showcaseEntitlementJwt %>
+  <!-- Google APIs -->
+  <script src="https://apis.google.com/js/platform.js" gapi_processed="true"></script>
+  <meta name="google-signin-client_id" content="473116443958-vj90h2kmovroseu2uhkvuq4ccgveun73.apps.googleusercontent.com">
+
+  <!-- GTech Demo Site CSS : styles.css -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- GTech Demo Site JS : public_constants.js -->
+  <script type="application/javascript" src="script/public_constants.js"></script>
+
+  <!-- GTech Demo Site JS : controller.js -->
+  <script type="application/javascript" src="script/controller.js"></script>
+
+    <!-- GTech Demo Site JS : utils.js -->
+  <script type="application/javascript" src="script/utils.js"></script>
+
+  <!-- GTech Demo Site Analytics Events : Load Analytics Events -->
+  <script type="application/javascript" src="script/analytics-events.json"></script>
+
+  <script> renderJsonLd('basic'); </script><script type="application/ld+json">{"@context":"http://schema.org","@type":"NewsArticle","headline":"gTech Swg Demo","image":"/icons/icon-2x.png","datePublished":"2025-02-05T08:00:00+08:00","dateModified":"2025-02-05T09:20:00+08:00","author":{"@type":"Person","name":"John Doe"},"publisher":{"name":"GTech Demo Pub News","@type":"Organization","@id":"gtech-demo-staging.appspot.com","logo":{"@type":"ImageObject","url":"/icons/icon-2x.png"}},"description":"This example loads a carousel of offers on click.","isAccessibleForFree":"False","isPartOf":{"@type":["CreativeWork","Product"],"name":"GTech Demo Pub News basic","productID":"gtech-demo.appspot.com:basic"}}</script>
+<script src="https://news.google.com/swg/js/v1/swg-gaa.js"></script>
+<script async="" subscriptions-control="manual" src="https://news.google.com/swg/js/v1/swg.js"></script>
+
+<script>
+$( document ).ready(function() {
+
+  /* Demo-related functions */
+
+  const urlParams = new URLSearchParams(location.search);
+  // Provide a shortcut to metering params.
+  // Do not copy the constant and see documentation at:
+  // https://developers.google.com/news/subscribe/extended-access/reference/google-article-access-parameters
+  if (urlParams.has('metering')) {
+    let newSearch = 'gaa_at=g&gaa_ts=99999999&gaa_n=n0nc3&gaa_sig=51g';
+    location.search = newSearch;
+  }
+  // In this example we set a userState after a succesful registration / login on the client-side.
+  // In the actual implementation, a userState can be set on the server-side.
+  if (urlParams.has('state')) {
+    createCookie('userState', atob(urlParams.get('state')));
+  }
+  // The userState object for the current user.
+  // Do not copy the implementation for the callback and see documentation for your own
+  // implementation at:
+  // https://developers.google.com/news/subscribe/extended-access/reference/user-state-object
+  function getUserState() {
+    const userStateStr = readCookie('userState');
+    if (userStateStr) {
+      let userState = JSON.parse(userStateStr);
+      // The actual implementation may require an API call to the backend server to obtain the
+      // entitlements information (granted , grantReason) for the given userState.
+      userState.granted = false;
+      return userState;
+    } else {
+      return { granted: false  /* Hard regwall */ };
+    }
+  }
+  const userState = getUserState();
+  // Display the userState object in the demo page.
+  if (userState) {
+    new consoleView('consoleView').consolePrint(userState);
+    $("#revokeButton").show();
+  }
+
+  /* EA functions */
+
+  /**
+    * Publisher-defined callbacks.
+    *
+    * The simplest possible implementation of showPaywall, unlockArticle, openLoginPage
+    * and handleSwGEntitlement. A more sophisticated implementation could fetch more data,
+    * or set cookies and refresh the whole page.
+    */
+
+  // Callback that must ensure the publisher’s standard paywall is shown to the user.
+  // This is used when Extended Access is not granted to the user or if the user
+  // clicks “Subscribe” on the Extended Access prompt.
+  // Do not copy the implementation for the callback and see documentation for your own implementation at:
+  // https://developers.google.com/news/subscribe/extended-access/integration-steps/web-implementation#handle-extended-access-grants
+  function showPaywall() {
+    console.log('Example: show paywall');
+  }
+
+  // Callback that must unlock the current article which is called when Google is
+  // granting Extended Access to the user.
+  // Do not copy the implementation for the callback and see documentation for your own implementation at:
+  // https://developers.google.com/news/subscribe/extended-access/integration-steps/web-implementation#handle-extended-access-grants
+  function unlockArticle() {
+    document.getElementById("paywalledContent").style.filter = "blur(0px)"
+    console.log('Example: unlock article');
+  }
+
+  // Only relevant for publishers doing Subscribe with Google.
+  // Callback that will be triggered if the user is a Subscribe with Google subscriber.
+  // Do not copy the implementation for the callback and see documentation for your own implementation at:
+  // https://developers.google.com/news/subscribe/guides/check-for-entitlements-on-web
+  function handleSwGEntitlement() {
+    console.log('Example: handle swg entitlement');
+    unlockArticle();
+  }
+
+  /*
+   * Publisher-defined promises.
+   *
+   * The simplest implementation of registerUserPromise, handleLoginPromise,
+   * and publisherEntitlementPromise.
+   */
+
+  // Get userState by passing the gaaUser object to your registration endpoint server
+  // Takes the registration JWT and returns an updated userState object for the newly registered user.
+  // Do not copy the implementation for the promise and see documentation for your own implementation at:
+  // https://developers.google.com/news/subscribe/extended-access/integration-steps/web-implementation#handle-registration-for-new-users
+  // TODO (swit): Remove this dummy registerUserPromise when PR #2311 is included in swg-js release.
+  registerUserPromise = new Promise ((resolve) => {});
+
+  // Allows the user to login to an existing publisher account and must resolve
+  // with an updated userState object for the newly logged-in user.
+  // Do not copy the implementation for the promise and see documentation for your own implementation at:
+  // https://developers.google.com/news/subscribe/extended-access/integration-steps/web-implementation#handle-login-for-existing-users
+  handleLoginPromise = new Promise ((resolve) => {
+    GaaMetering.getLoginPromise().then(() => {
+      alert('You may open your log in page');
+      // Example body of the promise returning a userState object
+      const loginUserState = {
+        id: 'user123456789',
+        registrationTimestamp: 1647311022,
+        granted: false,
+      };
+      new consoleView('consoleView').consolePrint("{User identified via Publisher's sign in}");
+      resolve(loginUserState);
+    });
+  });
+
+  // Get userState by passing the gaaUser object to your registration endpoint server
+  // Resolves with the current user’s entitlements from the publisher
+  // Optional - required only if your userState object doesn't contain the publisherEntitlement already
+  // Do not copy the implementation for the promise and see documentation for your own implementation at:
+  // https://developers.google.com/news/subscribe/extended-access/integration-steps/web-implementation#creating-the-users-entitlement-state
+  publisherEntitlementPromise = new Promise ((resolve) => {
+    resolve(userState);
+  });
+
+  /* Code */
+
+  // Array with all allowed hosts that can refer users to your article pages.
+  // This is used if you redirect users or refresh the page during the Handle registration
+  // for new users or Handle login for existing users flows.
+  // Do not copy the constant and see documentation at:
+  // https://developers.google.com/news/subscribe/extended-access/integration-steps/web-implementation#initialize-the-extended-access-library
+  const allowedReferrers = ["localhost",
+                            "gtech-demo.appspot.com",
+                            "gtech-demo-staging.appspot.com",
+                            "gaa-3p-signin-demo.glitch.me"]
+
+  // User's Showcase entitlement determined on your server
+  // Optional - server side only
+  // Do not copy the constant and see documentation at:
+  // https://developers.google.com/news/subscribe/guides/check-for-entitlements-on-web
+  const showcaseEntitlement = urlParams.get("showcaseEntitlement");
+
+  // Do not copy the parameters bellow. See documentation at:
+  // https://developers.google.com/news/subscribe/extended-access/integration-steps/web-implementation#initialize-the-extended-access-library
+
+
+  const authorizationUrl = 'https://gaa-3p-signin-demo.glitch.me/auth?source=' +
+        encodeURIComponent(location.href);
+
+  GaaMetering.init({
+    authorizationUrl: authorizationUrl,
+    allowedReferrers: allowedReferrers,
+    userState: userState,
+    unlockArticle: unlockArticle,
+    showPaywall: showPaywall,
+    handleSwGEntitlement: handleSwGEntitlement, // Optional - only if SwG is implemented
+    registerUserPromise: registerUserPromise,
+    handleLoginPromise: handleLoginPromise,
+    publisherEntitlementPromise: publisherEntitlementPromise, // Optional
+  });
+
+  $("#ea-registration-3p").addClass('current');
+
+});
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="https://news.google.com/swg/js/v1/swg-button.css"><link rel="preconnect prefetch" href="https://news.google.com/swg/js/v1/loader.svg"><link rel="preconnect" href="https://www.gstatic.com/"><link rel="preconnect" href="https://www.google.com/"><style type="text/css">
+  /** Common styles across all window sizes. */
+  .swg-dialog,
+  .swg-toast {
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 1) !important;
+  }
+
+  .swg-toast {
+    position: fixed !important;
+    bottom: 0 !important;
+    max-height: 46px !important;
+    z-index: 2147483647 !important;
+    border: none !important;
+  }
+
+  /**
+  * Wide desktop screen support, when width is >= 871px and height is >= 641px.
+  */
+  @media (min-width: 871px) and (min-height: 641px) {
+    .swg-dialog.swg-wide-dialog {
+      width: 870px !important;
+      left: -435px !important;
+    }
+  }
+
+  /** Tablet/Medium screen support, when width OR height is <= 640px. */
+  @media (max-width: 640px), (max-height: 640px) {
+    .swg-dialog,
+    .swg-toast {
+      width: 480px !important;
+      left: -240px !important;
+      margin-left: calc(100vw - 100vw / 2) !important;
+      border-top-left-radius: 8px !important;
+      border-top-right-radius: 8px !important;
+      box-shadow: rgba(60, 64, 67, 0.3) 0 1px 1px,
+        rgba(60, 64, 67, 0.15) 0 1px 4px 1px !important;
+    }
+  }
+
+  /** Desktop/Large screen support, when width AND height are >= 641px. */
+  @media (min-width: 641px) and (min-height: 641px) {
+    .swg-dialog {
+      width: 630px !important;
+      left: -315px !important;
+      margin-left: calc(100vw - 100vw / 2) !important;
+      background-color: transparent !important;
+      border: none !important;
+    }
+
+    .swg-toast {
+      border-radius: 4px !important;
+      bottom: 8px !important;
+      box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
+        0 1px 5px 0 rgb(0 0 0 / 12%) !important;
+      left: 8px !important;
+    }
+  }
+
+  /** Phone/Small screen support, when width is <= 480px. */
+  @media (max-width: 480px) {
+    .swg-dialog,
+    .swg-toast {
+      width: 100% !important;
+      left: 0 !important;
+      right: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
+
+  /**
+  * Class applied to content page to disable scrolling.
+  */
+  html > body.swg-disable-scroll {
+    height: 100vh !important;
+    overflow: hidden !important;
+    position: fixed;
+    width: 100% !important;
+  }
+
+  html > body.swg-disable-scroll * {
+    overflow: hidden !important;
+  }
+</style><style type="text/css">
+  body {
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  #swg-google-3p-sign-in-button,
+    #swg-sign-in-with-google-button,
+    #swg-google-sign-in-button {
+    margin: 0 auto;
+  }
+
+  #swg-sign-in-with-google-button {
+    width: 220px;
+  }
+
+  #swg-google-3p-sign-in-button > div,
+  #swg-sign-in-with-google-button > div,
+  #swg-google-sign-in-button > div {
+    animation: fadeIn 0.32s;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  #swg-google-3p-sign-in-button .abcRioButton.abcRioButtonBlue,
+  #swg-sign-in-with-google-button .abcRioButton.abcRioButtonBlue,
+  #swg-google-sign-in-button .abcRioButton.abcRioButtonBlue {
+    background-color: #1a73e8;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 4px;
+    width: 100% !important;
+  }
+  #swg-google-3p-sign-in-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonIcon,
+  #swg-sign-in-with-google-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonIcon,
+  #swg-google-sign-in-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonIcon {
+    display: none;
+  }
+  /** Hides default "Sign in with Google" text. */
+  #swg-google-3p-sign-in-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonContents
+    span[id^='not_signed_'],
+  #swg-sign-in-with-google-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonContents
+    span[id^='not_signed_'],
+  #swg-google-sign-in-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonContents
+    span[id^='not_signed_'] {
+    font-size: 0 !important;
+  }
+  /** Renders localized "Sign in with Google" text instead. */
+  #swg-google-3p-sign-in-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonContents
+    span[id^='not_signed_']::before,
+  #swg-sign-in-with-google-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonContents
+    span[id^='not_signed_']::before,
+  #swg-google-sign-in-button
+    .abcRioButton.abcRioButtonBlue
+    .abcRioButtonContents
+    span[id^='not_signed_']::before {
+    content: 'Sign in with Google';
+    font-size: 15px;
+  }
+
+
+    #swg-google-3p-sign-in-button .abcRioButtonContents {
+      font-family: Roboto, arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.21px;
+      margin-left: 6px;
+      margin-right: 6px;
+      vertical-align: top;
+    }
+    #swg-google-3p-sign-in-button .abcRioButton {
+      border-radius: 1px;
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 25%);
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: background-color 0.218s, border-color 0.218s,
+        box-shadow 0.218s;
+      transition: background-color 0.218s, border-color 0.218s,
+        box-shadow 0.218s;
+      -webkit-user-select: none;
+      -webkit-appearance: none;
+      background-color: #fff;
+      background-image: none;
+      color: #262626;
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      vertical-align: middle;
+      white-space: nowrap;
+      width: auto;
+    }
+    #swg-google-3p-sign-in-button .abcRioButtonBlue {
+      border: none;
+      color: #fff;
+    }
+  </style></head>
+
+<body class="docs subscribe-with-google" onload="prettyPrint()">
+
+  <!--  Top Navigation Bar -->
+  <nav class="navbar navbar-expand-lg fixed-top primary-nav">
+    <button class="navbar-toggler side-menu" onclick="sidebarToggle()">
+      <span class="material-icons">menu</span>
+    </button>
+    <a class="navbar-brand" href="index.html">GTech Demo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basic-example-nav" aria-controls="basic-example-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="material-icons">arrow_drop_down</span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basic-example-nav">
+      <ul class="navbar-nav mr-auto">
+       <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentation</a>
+          <div class="dropdown-menu dropdown-primary">
+            <a class="dropdown-item" target="_blank" href="https://developers.google.com/news/subscribe/guides/how-subscribe-with-google-works">How Subscribe with Google works [DevSite]</a>
+            <a class="dropdown-item" target="_blank" href="https://github.com/subscriptions-project/swg-js/tree/master/docs">subscriptions-project/swg-js [GitHub]</a>
+            <a class="dropdown-item" target="_blank" href="https://amp.dev/documentation/components/amp-subscriptions/">&lt;amp-subscriptions/&gt; [amp.dev]</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Developer Tools</a>
+          <div class="dropdown-menu dropdown-primary">
+            <a class="dropdown-item" target="_blank" href="https://search.google.com/structured-data/testing-tool/u/0/">Structured Data Testing Tool</a>
+            <a class="dropdown-item" target="_blank" href="https://search.google.com/test/amp">AMP Testing Tool</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Full Examples</a>
+          <div class="dropdown-menu dropdown-primary">
+            <a class="dropdown-item" target="_blank" href="https://scenic-2017.appspot.com/">[Scenic App] Subscribe with Google</a>
+            <a class="dropdown-item" href="html/">[Coming Soon] Contribute with Google</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="content devsite-content">
+      <div class="developer-site-nav">
+        <ul class="developer-site-nav-list">
+          <li id="overview"><a href="html/index.html">Overview</a></li>
+        </ul>
+        <hr>
+
+        <ul class="developer-site-nav-list">
+          <li class="developer-site-nav-header developer-site-nav-title" style="font-weight:bold">Extended Access</li>
+          <li id="ea-registration-latest"><a href="javascript:dynamicHref('ea-registration-flow-latest')">Registration Flow</a></li>
+          <li id="ea-registration-3p" class="current"><a href="javascript:dynamicHref('ea-registration-flow-3p')">Registration Flow (3P)</a></li>
+          <li id="ea-registration-gis"><a href="javascript:dynamicHref('ea-registration-flow-gis')">Legacy - Registration Flow with GIS widget</a></li>
+          <li id="ea-registration"><a href="javascript:dynamicHref('ea-registration-flow')">Legacy - Registration Flow with GSI widget</a></li>
+          <!--  <li class="disabled" id="ea-entitlements-sync"><a href="#">Entitlements Sync</a></li> -->
+        </ul>
+        <hr>
+
+        <ul class="developer-site-nav-list">
+          <li class="developer-site-nav-header developer-site-nav-title" style="font-weight:bold">Subscribe with Google</li>
+          <li class="developer-site-nav-header">Prerequisite</li>
+          <li id="google-siwg"><a href="html/google-siwg.html">Implement Sign In With Google</a></li>
+          <li id="publication-api-gis"><a href="html/publication-api-gis.html">Publication API with SIWG</a></li>
+          <li id="publication-api"><a href="html/publication-api.html">Legacy - Publication API with GSI</a></li>
+          <li id="markup-article-pages"><a href="html/markup-article-pages.html">Markup Article Pages</a></li>
+        </ul>
+
+        <ul class="developer-site-nav-list">
+          <li class="developer-site-nav-header">Web Integration</li>
+          <li id="configure-swgjs"><a href="html/configure-swgjs.html">Add swg.js</a></li>
+          <li id="add-swg-button"><a href="html/add-swg-button.html">Add Subscribe with Google Button</a></li>
+          <li id="show-offers-carousel"><a href="html/show-offers-carousel.html">Buy Flow - Show Offers Carousel</a></li>
+          <li id="show-offers-onclick"><a href="html/show-offers-onclick.html">Buy Flow - Show Offer OnClick</a></li>
+          <li id="direct-offer"><a href="html/direct-offer.html">Buy Flow - Direct Offer</a></li>
+          <li id="show-contributions-onclick"><a href="html/show-contributions-carousel.html">Contributions Flow - Show Carousel</a></li>
+          <li id="get-entitlements"><a href="html/get-entitlements.html">Get Entitlements</a></li>
+          <li id="auto-login"><a href="html/auto-login.html">Auto Log-in</a></li>
+          <li id="deferred-account-creation"><a href="html/deferred-account-creation.html">Deferred Account Creation</a></li>
+          <li id="account-linking-web"><a href="html/account-linking.html">Account Linking - Save Subscriptions</a></li>
+          <li id="update-subscriptions"><a href="html/update-subscriptions.html">Update Subscriptions</a></li>
+        </ul>
+
+        <ul class="developer-site-nav-list">
+          <li class="developer-site-nav-header">AMP Integration</li>
+          <li id="amp-subscriptions-google"><a href="html/amp-subscriptions-google.html">Configure amp-subscriptions-google</a></li>
+          <li id="amp-add-swg-button"><a href="html/amp-add-swg-button.html">Add Subscribe with Google Button</a></li>
+          <li id="amp-show-paywall-dialogs"><a href="html/amp-show-paywall-dialogs.html">Show Paywall Dialog</a></li>
+          <li id="amp-direct-offers"><a href="html/amp-show-direct-offers.html">Buy Flow - Direct Offer</a></li>
+          <li id="amp-custom-offers"><a href="html/amp-show-custom-offers.html">Buy Flow - Show Custom Offers</a></li>
+          <li id="amp-get-entitlements"><a href="html/amp-get-entitlements.html">Get Entitlements</a></li>
+        <!--  <li class="disabled" id="amp-account-linking"><a href="html/index.html#">Account Linking - Save Subscriptions</a></li> -->
+        </ul>
+
+
+
+        <!--
+        <hr />
+        <ul class="developer-site-nav-list">
+          <li class="developer-site-nav-header" style="font-weight:bold">Platform Integration</li>s
+          <li class="disabled" id="entitlements-api"><a href="html/index.html#">Entitlements API</a></li>
+          <li class="disabled" id="account-linking-entitlement-api"><a href="html/index.html#">OAuth2.0 Flow - Implicit</a></li>
+          <li class="disabled" id="subscription-status-api"><a href="html/index.html#">Subscription Status API</a></li>
+          <li class="disabled" id="publication-api"><a href="html/index.html#">Publication API</a></li>
+          <li class="disabled" id="rtdn"><a href="html/index.html#">RTDN Pub/Sub (Pull)</a></li>
+          <li class="disabled" id="rtdn-push"><a href="html/index.html#">RTDN Pub/Sub (Push)</a></li>
+        </ul>
+        -->
+      </div>
+
+    <div class="devsite-content-container">
+        <div class="devsite-content-details">
+
+          <article>
+  <h1>Extended Access - Registration Flow with 3P IDMS</h1>
+  <p>Launch a registration dialog for anonymous users to sign up and gain extended access to paid
+    articles. Registration and sign-in will be handled by a third-party Identity Management System
+     using Google OAuth 2.0.
+  </p>
+
+  <h3>
+    User State
+  </h3>
+    <section>
+      <pre id="consoleView" class="prettyprint"><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln"><br>&nbsp; &nbsp;</span></span><span class="str"><span class="str">"granted"</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pln"><span class="pln"><br></span></span><span class="pun"><span class="pun">}</span></span></pre>
+      <div id="revokeButton" style="">
+         <button class="btn btn-primary" onclick="removeUserState('https://play.google.com/newsstand/api/v3/articleaccess?testurl=' + window.location.protocol + '//' + window.location.host + '/html/ea-registration-3p.html')">Reset</button>
+    </div></section>
+
+  <div id="paywalledContent" style="filter: blur(4px)">
+    <section class="content-box">
+    <p>
+      <b>This is a premium article behind paywall.</b>
+    </p>
+    <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+   </p>
+   </section>
+  </div>
+
+  <p>
+  To simulate the experience of an anonymous user who visits this article page from a GAA panel for
+    the first time, click 'Reset'.
+  </p>
+
+  <p>
+  See <a href="https://developers.google.com/news/subscribe/extended-access/reference/third-party-identity-integration">Integrating with Third-party Identity Management System</a>.
+  </p>
+  <h3>
+    Example code
+  </h3>
+</article>
+
+
+          <pre class="prettyprint lang-html"><span class="tag">&lt;script&gt;</span><span class="pln"><br>&nbsp; </span><span class="com">// The endpoint that launches Google OAuth 2.0 flow and handles sign-in / registration.</span><span class="pln"><br>&nbsp; </span><span class="com">// The article URL is appended to allow a redirection upon successful sign-in / registration.</span><span class="pln"><br>&nbsp; </span><span class="kwd">const</span><span class="pln"> authorizationUrl </span><span class="pun">=</span><span class="pln"> </span><span class="str">'https://gaa-3p-signin-demo.glitch.me/auth?source='</span><span class="pln"> </span><span class="pun">+</span><span class="pln"><br>&nbsp; &nbsp; encodeURIComponent</span><span class="pun">(</span><span class="pln">location</span><span class="pun">.</span><span class="pln">href</span><span class="pun">);</span><span class="pln"><br><br>&nbsp; </span><span class="typ">GaaMetering</span><span class="pun">.</span><span class="pln">init</span><span class="pun">({</span><span class="pln"><br>&nbsp; &nbsp; authorizationUrl</span><span class="pun">:</span><span class="pln"> authorizationUrl</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; allowedReferrers</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="str">'example.com'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'gaa-3p-signin-demo.glitch.me'</span><span class="pun">],</span><span class="pln"><br>&nbsp; &nbsp; userState</span><span class="pun">:</span><span class="pln"> userState</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; unlockArticle</span><span class="pun">:</span><span class="pln"> unlockArticle</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; showPaywall</span><span class="pun">:</span><span class="pln"> showPaywall</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; handleSwGEntitlement</span><span class="pun">:</span><span class="pln"> handleSwGEntitlement</span><span class="pun">,</span><span class="pln"> </span><span class="com">// Optional - only if SwG is implemented</span><span class="pln"><br>&nbsp; &nbsp; handleLoginPromise</span><span class="pun">:</span><span class="pln"> handleLoginPromise</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; publisherEntitlementPromise</span><span class="pun">:</span><span class="pln"> publisherEntitlementPromise</span><span class="pun">,</span><span class="pln"><br>&nbsp; </span><span class="pun">});</span><span class="pln"><br></span><span class="tag">&lt;/script&gt;</span></pre>
+
         </div>
-      </main>
-    </div>
-    <div class="comments">
-      <a href="/setup"> Setup </a>
     </div>
 
-    <!-- Consume the Showcase entitlement, if it exists. -->
-    <%# showcaseEntitlementJwt %>
-    <script>
-      (self.SWG = self.SWG || []).push(function (subscriptions) {
-        // Create a new variable based on the "signedEntitlements"
-        // field in your response.
-        var showcaseEntitlementJwt = '<% showcaseEntitlementJwt %>';
+  </div>
 
-        // Consume the entitlement.
-        // This triggers the "You're getting more with Google" UX flow.
-        subscriptions.consumeShowcaseEntitlementJwt(showcaseEntitlementJwt);
-      });
-    </script>
-    <%/ showcaseEntitlementJwt %>
-  </body>
-</html>
+  <!-- Footer
+  TODO: Add in terms into the footer?
+  <footer class="page-footer font-small white pt-4">
+    <div class="container-fluid text-center text-md-left"></div>
+  </footer>
+ -->
+
+
+<iframe style="opacity: 0 !important; position: absolute !important; top: -10px !important; left: -10px !important; height: 1px !important; width: 1px !important;" src="https://news.google.com/swg/ui/v1/serviceiframe?_=1684276373491&amp;publicationId=gtech-demo.appspot.com"></iframe><div id="swg-regwall-container" style="color: unset !important; font: unset !important; font-palette: unset !important; font-synthesis: unset !important; forced-color-adjust: unset !important; text-orientation: unset !important; text-rendering: unset !important; -webkit-font-smoothing: unset !important; -webkit-locale: unset !important; -webkit-text-orientation: unset !important; -webkit-writing-mode: unset !important; writing-mode: unset !important; zoom: unset !important; accent-color: unset !important; place-content: unset !important; place-items: unset !important; place-self: unset !important; alignment-baseline: unset !important; animation-composition: unset !important; animation: unset !important; app-region: unset !important; appearance: unset !important; aspect-ratio: unset !important; backdrop-filter: unset !important; backface-visibility: unset !important; background-attachment: unset !important; background-blend-mode: unset !important; background-clip: unset !important; background-color: rgba(32, 33, 36, 0.6) !important; background-image: unset !important; background-origin: unset !important; background-position: unset !important; background-repeat: unset !important; background-size: unset !important; baseline-shift: unset !important; baseline-source: unset !important; block-size: unset !important; border-block: unset !important; border: none !important; border-radius: unset !important; border-collapse: unset !important; border-end-end-radius: unset !important; border-end-start-radius: unset !important; border-inline: unset !important; border-start-end-radius: unset !important; border-start-start-radius: unset !important; inset: 0px !important; box-shadow: unset !important; box-sizing: unset !important; break-after: unset !important; break-before: unset !important; break-inside: unset !important; buffered-rendering: unset !important; caption-side: unset !important; caret-color: unset !important; clear: unset !important; clip: unset !important; clip-path: unset !important; clip-rule: unset !important; color-interpolation: unset !important; color-interpolation-filters: unset !important; color-rendering: unset !important; color-scheme: unset !important; columns: unset !important; column-fill: unset !important; gap: unset !important; column-rule: unset !important; column-span: unset !important; contain: unset !important; contain-intrinsic-block-size: unset !important; contain-intrinsic-size: unset !important; contain-intrinsic-inline-size: unset !important; container: unset !important; content: unset !important; content-visibility: unset !important; counter-increment: unset !important; counter-reset: unset !important; counter-set: unset !important; cursor: unset !important; cx: unset !important; cy: unset !important; d: unset !important; display: unset !important; dominant-baseline: unset !important; empty-cells: unset !important; fill: unset !important; fill-opacity: unset !important; fill-rule: unset !important; filter: unset !important; flex: unset !important; flex-flow: unset !important; float: unset !important; flood-color: unset !important; flood-opacity: unset !important; grid: unset !important; grid-area: unset !important; height: 100% !important; hyphenate-character: unset !important; hyphenate-limit-chars: unset !important; hyphens: unset !important; image-orientation: unset !important; image-rendering: unset !important; initial-letter: unset !important; inline-size: unset !important; inset-block: unset !important; inset-inline: unset !important; isolation: unset !important; letter-spacing: unset !important; lighting-color: unset !important; line-break: unset !important; list-style: unset !important; margin-block: unset !important; margin: unset !important; margin-inline: unset !important; marker: unset !important; mask: unset !important; mask-type: unset !important; math-depth: unset !important; math-shift: unset !important; math-style: unset !important; max-block-size: unset !important; max-height: unset !important; max-inline-size: unset !important; max-width: unset !important; min-block-size: unset !important; min-height: unset !important; min-inline-size: unset !important; min-width: unset !important; mix-blend-mode: unset !important; object-fit: unset !important; object-position: unset !important; object-view-box: unset !important; offset: unset !important; opacity: 1 !important; order: unset !important; orphans: unset !important; outline: unset !important; outline-offset: unset !important; overflow-anchor: unset !important; overflow-clip-margin: unset !important; overflow-wrap: unset !important; overflow: unset !important; overscroll-behavior-block: unset !important; overscroll-behavior-inline: unset !important; overscroll-behavior: unset !important; padding-block: unset !important; padding: unset !important; padding-inline: unset !important; page: unset !important; page-orientation: unset !important; paint-order: unset !important; perspective: unset !important; perspective-origin: unset !important; pointer-events: none !important; position: fixed !important; quotes: unset !important; r: unset !important; resize: unset !important; rotate: unset !important; ruby-position: unset !important; rx: unset !important; ry: unset !important; scale: unset !important; scroll-behavior: unset !important; scroll-margin-block: unset !important; scroll-margin: unset !important; scroll-margin-inline: unset !important; scroll-padding-block: unset !important; scroll-padding: unset !important; scroll-padding-inline: unset !important; scroll-snap-align: unset !important; scroll-snap-stop: unset !important; scroll-snap-type: unset !important; scrollbar-gutter: unset !important; shape-image-threshold: unset !important; shape-margin: unset !important; shape-outside: unset !important; shape-rendering: unset !important; size: unset !important; speak: unset !important; stop-color: unset !important; stop-opacity: unset !important; stroke: unset !important; stroke-dasharray: unset !important; stroke-dashoffset: unset !important; stroke-linecap: unset !important; stroke-linejoin: unset !important; stroke-miterlimit: unset !important; stroke-opacity: unset !important; stroke-width: unset !important; tab-size: unset !important; table-layout: unset !important; text-align: unset !important; text-align-last: unset !important; text-anchor: unset !important; text-combine-upright: unset !important; text-decoration: unset !important; text-decoration-skip-ink: unset !important; text-emphasis: unset !important; text-emphasis-position: unset !important; text-indent: unset !important; text-overflow: unset !important; text-shadow: unset !important; text-size-adjust: unset !important; text-transform: unset !important; text-underline-offset: unset !important; text-underline-position: unset !important; touch-action: unset !important; transform: unset !important; transform-box: unset !important; transform-origin: unset !important; transform-style: unset !important; transition: opacity 0.5s ease 0s !important; translate: unset !important; user-select: unset !important; vector-effect: unset !important; vertical-align: unset !important; view-transition-name: unset !important; visibility: unset !important; border-spacing: unset !important; -webkit-box-align: unset !important; -webkit-box-decoration-break: unset !important; -webkit-box-direction: unset !important; -webkit-box-flex: unset !important; -webkit-box-ordinal-group: unset !important; -webkit-box-orient: unset !important; -webkit-box-pack: unset !important; -webkit-box-reflect: unset !important; -webkit-highlight: unset !important; -webkit-line-break: unset !important; -webkit-line-clamp: unset !important; -webkit-mask-box-image: unset !important; -webkit-mask: unset !important; -webkit-mask-composite: unset !important; -webkit-print-color-adjust: unset !important; -webkit-rtl-ordering: unset !important; -webkit-ruby-position: unset !important; -webkit-tap-highlight-color: unset !important; -webkit-text-combine: unset !important; -webkit-text-decorations-in-effect: unset !important; -webkit-text-fill-color: unset !important; -webkit-text-security: unset !important; -webkit-text-stroke: unset !important; -webkit-user-drag: unset !important; -webkit-user-modify: unset !important; white-space: unset !important; widows: unset !important; width: 100% !important; will-change: unset !important; word-break: unset !important; word-spacing: unset !important; x: unset !important; y: unset !important; z-index: 2147483646 !important;">
+  <style>
+    
+  .gaa-metering-regwall--dialog-spacer,
+  .gaa-metering-regwall--dialog,
+  .gaa-metering-regwall--logo,
+  .gaa-metering-regwall--title,
+  .gaa-metering-regwall--description,
+  .gaa-metering-regwall--description strong,
+  .gaa-metering-regwall--iframe,
+  .gaa-metering-regwall--registration-button-container,
+  .gaa-metering-regwall--casl {
+    all: initial !important;
+    box-sizing: border-box !important;
+    font-family: Roboto, arial, sans-serif !important;
+  }
+
+  .gaa-metering-regwall--dialog-spacer {
+    background: linear-gradient(0, #808080, transparent) !important;
+    bottom: 0 !important;
+    display: block !important;
+    position: fixed !important;
+    width: 100% !important;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translate(0, 200px) !important;
+    }
+    to {
+      transform: translate(0, 0) !important;
+    }
+  }
+
+  .gaa-metering-regwall--dialog {
+    animation: slideUp 0.5s !important;
+    background: white !important;
+    border-radius: 12px 12px 0 0 !important;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.3) !important;
+    display: block !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    padding: 24px 20px !important;
+    pointer-events: auto !important;
+    width: 410px !important;
+  }
+
+  .gaa-metering-regwall--logo {
+    display: block !important;
+    margin: 0 auto 24px !important;
+  }
+
+  .gaa-metering-regwall--title {
+    color: #000 !important;
+    display: block !important;
+    font-size: 16px !important;
+    margin: 0 0 8px !important;
+    outline: none !important;
+  }
+
+  .gaa-metering-regwall--description {
+    color: #646464 !important;
+    display: block !important;
+    font-size: 14px !important;
+    line-height: 19px !important;
+    margin: 0 0 30px !important;
+  }
+
+  .gaa-metering-regwall--description strong {
+    color: #646464 !important;
+    font-size: 14px !important;
+    line-height: 19px !important;
+    font-weight: bold !important;
+  }
+
+  .gaa-metering-regwall--iframe {
+    border: none !important;
+    display: block !important;
+    height: 44px !important;
+    margin: 0 0 30px !important;
+    width: 100% !important;
+  }
+
+  .gaa-metering-regwall--registration-button-container {
+    border: none !important;
+    display: block !important;
+    height: 44px !important;
+    margin: 0 0 30px !important;
+    width: 100% !important;
+  }
+
+  .gaa-metering-regwall--casl {
+    color: #646464 !important;
+    display: block !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    margin: -16px auto 32px !important;
+  }
+
+  .gaa-metering-regwall--casl a {
+    color: #1967d2 !important;
+  }
+
+  .gaa-metering-regwall--line {
+    background-color: #ddd !important;
+    display: block !important;
+    height: 1px !important;
+    margin: 0 0 24px !important;
+  }
+
+  .gaa-metering-regwall--publisher-sign-in-button {
+    color: #1967d2 !important;
+    cursor: pointer !important;
+    display: block !important;
+    font-size: 12px !important;
+    text-decoration: underline !important;
+  }
+
+  .gaa-metering-regwall--google-sign-in-button {
+    height: 36px !important;
+    margin: 0 auto 30px !important;
+  }
+
+  .gaa-metering-regwall--google-sign-in-button > div {
+    animation: swgGoogleSignInButtonfadeIn 0.32s !important;
+  }
+
+  @keyframes swgGoogleSignInButtonfadeIn {
+    from {
+      opacity: 0 !important;
+    }
+    to {
+      opacity: 1 !important;
+    }
+  }
+
+  </style>
+
+  <div class="gaa-metering-regwall--dialog-spacer">
+    <div role="dialog" aria-modal="true" class="gaa-metering-regwall--dialog" id="swg-regwall-dialog" aria-labelledby="swg-regwall-title">
+      <img alt="Google" class="gaa-metering-regwall--logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDc0IDI0Ij48cGF0aCBmaWxsPSIjNDI4NUY0IiBkPSJNOS4yNCA4LjE5djIuNDZoNS44OGMtLjE4IDEuMzgtLjY0IDIuMzktMS4zNCAzLjEtLjg2Ljg2LTIuMiAxLjgtNC41NCAxLjgtMy42MiAwLTYuNDUtMi45Mi02LjQ1LTYuNTRzMi44My02LjU0IDYuNDUtNi41NGMxLjk1IDAgMy4zOC43NyA0LjQzIDEuNzZMMTUuNCAyLjVDMTMuOTQgMS4wOCAxMS45OCAwIDkuMjQgMCA0LjI4IDAgLjExIDQuMDQuMTEgOXM0LjE3IDkgOS4xMyA5YzIuNjggMCA0LjctLjg4IDYuMjgtMi41MiAxLjYyLTEuNjIgMi4xMy0zLjkxIDIuMTMtNS43NSAwLS41Ny0uMDQtMS4xLS4xMy0xLjU0SDkuMjR6Ii8+PHBhdGggZmlsbD0iI0VBNDMzNSIgZD0iTTI1IDYuMTljLTMuMjEgMC01LjgzIDIuNDQtNS44MyA1LjgxIDAgMy4zNCAyLjYyIDUuODEgNS44MyA1LjgxczUuODMtMi40NiA1LjgzLTUuODFjMC0zLjM3LTIuNjItNS44MS01LjgzLTUuODF6bTAgOS4zM2MtMS43NiAwLTMuMjgtMS40NS0zLjI4LTMuNTIgMC0yLjA5IDEuNTItMy41MiAzLjI4LTMuNTJzMy4yOCAxLjQzIDMuMjggMy41MmMwIDIuMDctMS41MiAzLjUyLTMuMjggMy41MnoiLz48cGF0aCBmaWxsPSIjNDI4NUY0IiBkPSJNNTMuNTggNy40OWgtLjA5Yy0uNTctLjY4LTEuNjctMS4zLTMuMDYtMS4zQzQ3LjUzIDYuMTkgNDUgOC43MiA0NSAxMmMwIDMuMjYgMi41MyA1LjgxIDUuNDMgNS44MSAxLjM5IDAgMi40OS0uNjIgMy4wNi0xLjMyaC4wOXYuODFjMCAyLjIyLTEuMTkgMy40MS0zLjEgMy40MS0xLjU2IDAtMi41My0xLjEyLTIuOTMtMi4wN2wtMi4yMi45MmMuNjQgMS41NCAyLjMzIDMuNDMgNS4xNSAzLjQzIDIuOTkgMCA1LjUyLTEuNzYgNS41Mi02LjA1VjYuNDloLTIuNDJ2MXptLTIuOTMgOC4wM2MtMS43NiAwLTMuMS0xLjUtMy4xLTMuNTIgMC0yLjA1IDEuMzQtMy41MiAzLjEtMy41MiAxLjc0IDAgMy4xIDEuNSAzLjEgMy41NC4wMSAyLjAzLTEuMzYgMy41LTMuMSAzLjV6Ii8+PHBhdGggZmlsbD0iI0ZCQkMwNSIgZD0iTTM4IDYuMTljLTMuMjEgMC01LjgzIDIuNDQtNS44MyA1LjgxIDAgMy4zNCAyLjYyIDUuODEgNS44MyA1LjgxczUuODMtMi40NiA1LjgzLTUuODFjMC0zLjM3LTIuNjItNS44MS01LjgzLTUuODF6bTAgOS4zM2MtMS43NiAwLTMuMjgtMS40NS0zLjI4LTMuNTIgMC0yLjA5IDEuNTItMy41MiAzLjI4LTMuNTJzMy4yOCAxLjQzIDMuMjggMy41MmMwIDIuMDctMS41MiAzLjUyLTMuMjggMy41MnoiLz48cGF0aCBmaWxsPSIjMzRBODUzIiBkPSJNNTggLjI0aDIuNTF2MTcuNTdINTh6Ii8+PHBhdGggZmlsbD0iI0VBNDMzNSIgZD0iTTY4LjI2IDE1LjUyYy0xLjMgMC0yLjIyLS41OS0yLjgyLTEuNzZsNy43Ny0zLjIxLS4yNi0uNjZjLS40OC0xLjMtMS45Ni0zLjctNC45Ny0zLjctMi45OSAwLTUuNDggMi4zNS01LjQ4IDUuODEgMCAzLjI2IDIuNDYgNS44MSA1Ljc2IDUuODEgMi42NiAwIDQuMi0xLjYzIDQuODQtMi41N2wtMS45OC0xLjMyYy0uNjYuOTYtMS41NiAxLjYtMi44NiAxLjZ6bS0uMTgtNy4xNWMxLjAzIDAgMS45MS41MyAyLjIgMS4yOGwtNS4yNSAyLjE3YzAtMi40NCAxLjczLTMuNDUgMy4wNS0zLjQ1eiIvPjwvc3ZnPg==">
+
+      <div class="gaa-metering-regwall--title" id="swg-regwall-title" tabindex="0">
+        Get more with Google
+      </div>
+
+      <div class="gaa-metering-regwall--description">
+        This content usually requires payment, but Google is giving you free access to this article and more when you register with GTech Demo Pub News using your Google Account.
+      </div>
+
+      
+  <div id="swg-registration-button-container" class="gaa-metering-regwall--registration-button-container"><div id="swg-google-3p-sign-in-button" tabindex="0">
+  <div style="height:36px;width:180px;" class="abcRioButton abcRioButtonBlue">
+    <span style="font-size:15px;line-height:34px;" class="abcRioButtonContents">
+      <span id="not_signed_in">Sign in with Google</span>
+    </span>
+  </div>
+</div></div>
+ 
+
+      <div class="gaa-metering-regwall--line"></div>
+
+      <a id="swg-publisher-sign-in-button" class="gaa-metering-regwall--publisher-sign-in-button" tabindex="0" href="#">
+        Already registered? Sign in
+      </a>
+    </div>
+  </div>
+</div></body></html>
