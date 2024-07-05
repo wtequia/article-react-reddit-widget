@@ -16,6 +16,11 @@ pipeline {
                 '''
             }
         }
+        stage('Verify Docker Installation') {
+            steps {
+                sh 'docker --version' // Verifica que Docker CLI está instalado
+            }
+        }
         stage('Print Message') {
             steps {
                 echo 'Hola, este es un mensaje de Jenkins!'
