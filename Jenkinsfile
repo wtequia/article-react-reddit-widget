@@ -1,14 +1,19 @@
 pipeline {
     agent {
         docker {
-            image 'timbru31/node-alpine-git:fermium'
-            registryCredentialsId 'f38521ce-4a24-4881-96f7-8a1d22a7f8fa'
+            image 'docker:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
     stages {
-        stage('Print Message') {
+        stage('Build') {
             steps {
-                echo 'Hola, este es un mensaje de Jenkins!'
+                sh 'docker build -t myimage .'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'docker run -d --name mycontainer myimage'
             }
         }
     }
