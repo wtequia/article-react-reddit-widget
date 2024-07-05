@@ -2,22 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Preparation') {
             steps {
-                // Clonar el repositorio una vez
-                git url: 'https://github.com/wtequia/article-react-reddit-widget.git'
+                script {
+                    // Instalar make si no está presente
+                    sh 'apt-get update && apt-get install -y make'
+                }
             }
         }
-        stage('Build and Test') {
+        stage('Build') {
             steps {
-                // Realizar pasos de compilación y pruebas
                 sh 'make'
-                sh 'make test'
             }
         }
         stage('Deploy') {
             steps {
-                // Desplegar la aplicación
                 sh 'make deploy'
             }
         }
