@@ -7,6 +7,10 @@ pipeline {
         }
     }
 
+    environment {
+        GITHUB_CREDENTIALS = credentials('token_personal_wtequia')
+    }
+
     stages {
         stage('Install Docker CLI') {
             steps {
@@ -49,3 +53,4 @@ pipeline {
         }
     }
 }
+
