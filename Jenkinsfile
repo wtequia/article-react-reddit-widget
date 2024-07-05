@@ -1,13 +1,19 @@
 pipeline {
-  agent {
-    docker {
-			image 'timbru31/node-alpine-git:fermium' // Imagen Docker personalizada
-            		args '-v /var/run/docker.sock:/var/run/docker.sock' // Montar el socket Docker del host
-			registryCredentialsId 'f38521ce-4a24-4881-96f7-8a1d22a7f8fa'
+    agent {
+        docker {
+            image 'docker:19.03.12-dind' // Imagen Docker que incluye Docker
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock' // Opciones adicionales para DinD
+            registryCredentialsId 'f38521ce-4a24-4881-96f7-8a1d22a7f8fa'
+        }
     }
-  }  
 
     stages {
+        stage('Setup Docker') {
+            steps {
+                sh 'dockerd-entrypoint.sh &'
+                sh 'sleep 10' // Esperar a que el daemon Docker se inicie
+            }
+        }
         stage('Print Message') {
             steps {
                 echo 'Hola, este es un mensaje de Jenkins!'
@@ -15,14 +21,9 @@ pipeline {
         }
     }
 
-   post {
+    post {
         always {
-            script {
-                // Envolviendo cleanWs en un bloque node dentro del script para proporcionar el contexto adecuado
-                node {
-                    cleanWs() // Limpia el workspace después de que el pipeline termine, sin importar si tuvo éxito o falló
-                }
-            }
+            cleanWs() // Limpia el workspace después de que el pipeline termine, sin importar si tuvo éxito o falló
         }
         success {
             echo 'El proceso se completó exitosamente!'
