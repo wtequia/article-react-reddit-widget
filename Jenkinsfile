@@ -26,8 +26,10 @@ pipeline {
     post {
         always {
             script {
-                // Ejecutar cleanWs en el nodo principal para asegurar que tiene el contexto adecuado
-                cleanWs() // Limpia el workspace después de que el pipeline termine, sin importar si tuvo éxito o falló
+                // Envolviendo cleanWs en un bloque node para proporcionar el contexto adecuado
+                node {
+                    cleanWs() // Limpia el workspace después de que el pipeline termine, sin importar si tuvo éxito o falló
+                }
             }
         }
         success {
