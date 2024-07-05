@@ -1,26 +1,27 @@
 pipeline {
-  agent {
-    any {
-			image 'timbru31/node-alpine-git:fermium'
-			registryCredentialsId 'DOCKER_ID'
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Aquí puedes agregar tus pasos de compilación, por ejemplo:
+                 sh 'make'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Aquí puedes agregar tus pasos de prueba, por ejemplo:
+                 sh 'make test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Aquí puedes agregar tus pasos de despliegue, por ejemplo:
+                 sh 'make deploy'
+            }
+        }
     }
-  }  
-  stages {
-		stage('Build') {
-			steps {
-				sh 'cd ee-components && npm install --no-save'
-				sh 'cd ee-components && npm run prepare'
-			}
-		}
-		stage('Build chromatic') {
-			steps {
-				sh 'cd ee-components && npm run chromatic'
-			}
-		}
-  }
-  post { 
-		always { 
-			cleanWs()
-		}
-	}
 }
