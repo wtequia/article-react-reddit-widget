@@ -1,17 +1,19 @@
 pipeline {
     agent {
         docker {
-            image 'docker:19.03.12-dind' // Imagen Docker que incluye Docker
-            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock' // Opciones adicionales para DinD
+            image 'timbru31/node-alpine-git:fermium' // Imagen Docker personalizada
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // Montar el socket Docker del host
             registryCredentialsId 'f38521ce-4a24-4881-96f7-8a1d22a7f8fa'
         }
     }
 
     stages {
-        stage('Setup Docker') {
+        stage('Install Docker CLI') {
             steps {
-                sh 'dockerd-entrypoint.sh &'
-                sh 'sleep 10' // Esperar a que el daemon Docker se inicie
+                sh '''
+                    apk update
+                    apk add docker
+                '''
             }
         }
         stage('Print Message') {
@@ -23,7 +25,10 @@ pipeline {
 
     post {
         always {
-            cleanWs() // Limpia el workspace después de que el pipeline termine, sin importar si tuvo éxito o falló
+            script {
+                // Ejecutar cleanWs en el nodo principal para asegurar que tiene el contexto adecuado
+                cleanWs() // Limpia el workspace después de que el pipeline termine, sin importar si tuvo éxito o falló
+            }
         }
         success {
             echo 'El proceso se completó exitosamente!'
