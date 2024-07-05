@@ -1,7 +1,8 @@
 pipeline {
   agent {
     docker {
-			image 'timbru31/node-alpine-git:fermium'
+			image 'timbru31/node-alpine-git:fermium' // Imagen Docker personalizada
+            		args '-v /var/run/docker.sock:/var/run/docker.sock' // Montar el socket Docker del host
 			registryCredentialsId 'f38521ce-4a24-4881-96f7-8a1d22a7f8fa'
     }
   }  
