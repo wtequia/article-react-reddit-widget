@@ -1,19 +1,11 @@
 pipeline {
     agent {
-        docker {
-            image 'docker:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
+        docker { image 'node:18.17.0-alpine3.18' }
     }
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                sh 'docker build -t myimage .'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'docker run -d --name mycontainer myimage'
+                sh 'node --version'
             }
         }
     }
