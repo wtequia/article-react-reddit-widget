@@ -2,25 +2,23 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building...'
-                // Aquí puedes agregar tus pasos de compilación, por ejemplo:
-                 sh 'make'
+                // Clonar el repositorio una vez
+                git url: 'https://github.com/wtequia/article-react-reddit-widget.git'
             }
         }
-        stage('Test') {
+        stage('Build and Test') {
             steps {
-                echo 'Testing...'
-                // Aquí puedes agregar tus pasos de prueba, por ejemplo:
-                 sh 'make test'
+                // Realizar pasos de compilación y pruebas
+                sh 'make'
+                sh 'make test'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
-                // Aquí puedes agregar tus pasos de despliegue, por ejemplo:
-                 sh 'make deploy'
+                // Desplegar la aplicación
+                sh 'make deploy'
             }
         }
     }
