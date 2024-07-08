@@ -1,7 +1,10 @@
 pipeline {
-    agent {
-        docker { image 'node:20.15.0-alpine3.20' }
+  agent {
+    docker {
+			image 'timbru31/node-alpine-git:fermium'
+			registryCredentialsId 'DOCKER_ID'
     }
+  }  
     stages {
         stage('Test') {
             steps {
@@ -9,4 +12,9 @@ pipeline {
             }
         }
     }
+  post { 
+		always { 
+			cleanWs()
+		}
+	}
 }
