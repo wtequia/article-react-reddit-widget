@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-			image 'timbru31/node-alpine-git:fermium'
+			image 'node:18-alpine'
 	   		registryCredentialsId 'DOCKER_ID'
     }
   }  
