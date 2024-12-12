@@ -31,3 +31,50 @@
 </body>
 </html>
 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anuncio con ID de Línea en la Página</title>
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+  <script>
+    window.googletag = window.googletag || {cmd: []};
+    googletag.cmd.push(function() {
+      // Definir el bloque de anuncio
+      var slot = googletag.defineSlot('/21955072735/elespectador-arc/home', [300, 600], 'div-gpt-ad-123456789-0')
+                .addService(googletag.pubads());
+
+      // Agregar targeting por palabras clave
+      slot.setTargeting('posicion', 'MTop-2');
+
+      // Habilitar servicios y agregar eventos de renderizado
+      googletag.pubads().addEventListener('slotRenderEnded', function(event) {
+        if (event.slot.getSlotElementId() === 'div-gpt-ad-123456789-0') {
+          const lineItemId = event.lineItemId || 'N/A'; // Si no hay ID disponible
+          document.getElementById('line-item-id').textContent = `ID del elemento de línea: ${lineItemId}`;
+        }
+      });
+
+      googletag.enableServices();
+    });
+  </script>
+</head>
+<body>
+  <h1>Anuncio con Google Ad Manager</h1>
+  <div id="div-gpt-ad-123456789-0" style="width: 300px; height: 600px; border: 1px solid #ccc;">
+    <script>
+      googletag.cmd.push(function() {
+        googletag.display('div-gpt-ad-123456789-0');
+      });
+    </script>
+  </div>
+  
+  <p id="line-item-id" style="margin-top: 20px; font-size: 16px; color: #333;">
+    Cargando ID del elemento de línea...
+  </p>
+</body>
+</html>
+
+
