@@ -3,47 +3,64 @@
     <head>
         <link rel="icon" type="image/png" href="/favicon.png">
         <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
-        <script async src="https://www.eltiempo.com/js/ad_prebid_library.js?2205052000"></script>
+        <script async src="//cdn.jsdelivr.net/npm/prebid.js@latest/dist/not-for-prod/prebid.js"></script>
         <script>
-            var div_1_sizes = [
-                [300, 250]
-            ];
+            var div_1_sizes =   [
+        [970, 250],
+        [1000, 250],
+        [1200, 250],
+        [320, 100],
+        [300, 100],
+        [320, 160]
+      ];
             var div_2_sizes = [
-                [300, 250]
-            ];
-
+        [300, 600],
+        [320, 600],
+        [360, 600],
+        [336, 280],
+        [300, 250],
+        [320, 100]
+      ];
+            let teadsPlacement = 134841;
+            let teadsPage = 119437;
+            var PREBID_TIMEOUT = 1000;
             var FAILSAFE_TIMEOUT = 3000;
 
             var adUnits = [
                 {
-                    code: '/21955072735/elespectador-arc/el-carrito/recuento-de-los-46-anos-de-la-vida-politica-de-alvaro-uribe/',
+                    code: '/21955072735/elespectador-arc/home',
                     mediaTypes: {
                         banner: {
                             sizes: div_1_sizes
                         }
                     },
-                            bids: [{
-                        bidder: "teads",
-                         params: {
-                             placementId: 134841,
-                             pageId: 119437
-                             }
-                        }]
+                    bids: [{
+                        bidder: 'appnexus',
+                        params: {
+                            placementId: 13144370
+                        }
+                    }]
                 },
                 {
-                    code: '/21955072735/elespectador-arc/el-carrito/recuento-de-los-46-anos-de-la-vida-politica-de-alvaro-uribe/',
+                    code: '/21955072735/elespectador-arc/home',
                     mediaTypes: {
                         banner: {
                             sizes: div_2_sizes
                         }
                     },
                     bids: [{
-                        bidder: "teads",
-                         params: {
-                             placementId: 134841,
-                             pageId: 119437
-                             }
-                        }]
+                        bidder: 'appnexus',
+                        params: {
+                            placementId: 13144370
+                        }
+                    },
+                           {
+            bidder: 'teads',
+            params: {
+              placementId: teadsPlacement,
+              pageId: teadsPlacement,
+            },
+          },]
                 }
             ];
 
@@ -61,6 +78,7 @@
                 pbjs.addAdUnits(adUnits);
                 pbjs.requestBids({
                     bidsBackHandler: initAdserver,
+                    timeout: PREBID_TIMEOUT
                 });
             });
 
@@ -80,12 +98,12 @@
             }, FAILSAFE_TIMEOUT);
 
             googletag.cmd.push(function() {
-                googletag.defineSlot('/21955072735/elespectador-arc/el-carrito/recuento-de-los-46-anos-de-la-vida-politica-de-alvaro-uribe/', div_1_sizes, 'div-1').addService(googletag.pubads());
+                googletag.defineSlot('/19968336/header-bid-tag-0', div_1_sizes, 'div-1').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.enableServices();
             });
             googletag.cmd.push(function() {
-                googletag.defineSlot('/21955072735/elespectador-arc/el-carrito/recuento-de-los-46-anos-de-la-vida-politica-de-alvaro-uribe/', div_2_sizes, 'div-2').addService(googletag.pubads());
+                googletag.defineSlot('/19968336/header-bid-tag-1', div_2_sizes, 'div-2').addService(googletag.pubads());
                 googletag.pubads().enableSingleRequest();
                 googletag.enableServices();
             });
