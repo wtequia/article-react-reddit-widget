@@ -306,7 +306,7 @@
 								
 								
 								spotDivName = 'articleDesktopStickyAd';
-								gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+								gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 								richmedia = false;
 								native=0
 								Config.variables.native = 0;
@@ -365,10 +365,10 @@
 						spotDivName = 'divNative-'+numArticle;
 						if(numArticle ==  1){
 							spotDivName = 'articleDesktopStickyAd';
-							gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 							richmedia = false;
 						}else{
-							gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90],[970,250], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion/'+ adsPreName +'BannerTop_General', [[728, 90],[970,250], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 							richmedia = false;
 						}
 							
@@ -538,7 +538,7 @@
 			googletag.cmd.push(function(){
 
 				let spotDivName = 'articleDesktopStickyAd';
-				gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
+				gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
 
 
 				googletag.pubads().collapseEmptyDivs();
