@@ -306,7 +306,11 @@
 								
 								
 								spotDivName = 'articleDesktopStickyAd';
-								gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+								if (adSeccion == 'nacion'){
+									gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+								} else {
+									gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+								}
 								richmedia = false;
 								native=0
 								Config.variables.native = 0;
