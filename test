@@ -237,11 +237,7 @@
 						//gptadslots1 = googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', [728, 90], 'divBarraAd').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
 						
 						//gptadslots1 = googletag.defineOutOfPageSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting(REFRESH_KEY,REFRESH_VALUE).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
-						if (adSeccion == 'nacion'){
-							gptadslots1 = googletag.defineOutOfPageSlot('/11420885/pulzo/nacion', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BarraBottom_Flotante').addService(googletag.pubads());
-						} else {
-							gptadslots1 = googletag.defineOutOfPageSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
-						}
+							gptadslots1 = googletag.defineOutOfPageSlot('/11420885/pulzo/' + adSeccion, googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BarraBottom_Flotante').addService(googletag.pubads());
 						
 
 
@@ -311,11 +307,8 @@
 								
 								
 								spotDivName = 'articleDesktopStickyAd';
-								if (adSeccion == 'nacion'){
-									gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-								} else {
-									gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-								}
+									gptadslots[10] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+								
 								richmedia = false;
 								native=0
 								Config.variables.native = 0;
@@ -374,20 +367,13 @@
 						spotDivName = 'divNative-'+numArticle;
 						if(numArticle ==  1){
 							spotDivName = 'articleDesktopStickyAd';
-							if (adSeccion == 'nacion'){
-								gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-							} else {
-								gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-							}
+								gptadslots[10] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+							
+							
 							
 							richmedia = false;
 						}else{
-							if (adSeccion == 'nacion'){
-								gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion'+ adsPreName +'BannerTop_General', [[728, 90],[970,250], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads())
-							} else {
-								gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion'+ adsPreName +'BannerTop_General', [[728, 90],[970,250], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads())
-							}
-							;
+							gptadslots[10] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[728, 90],[970,250], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
 							richmedia = false;
 						}
 							
@@ -557,11 +543,8 @@
 			googletag.cmd.push(function(){
 
 				let spotDivName = 'articleDesktopStickyAd';
-				if (adSeccion == 'nacion'){
-					gptadslots[10] = googletag.defineSlot('/11420885/pulzo/nacion', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-				} else {
-					gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_General', [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-				}
+					gptadslots[10] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+				
 				
 
 
