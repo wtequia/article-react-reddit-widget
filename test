@@ -335,11 +335,11 @@
 
 					//cargar interstitial de google
 					if(numArticle == 1){
-						gptadslots[61] = googletag.defineOutOfPageSlot('/11420885/' + adsPreName  + 'Interstitial', googletag.enums.OutOfPageFormat.INTERSTITIAL).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[61] = googletag.defineOutOfPageSlot('/11420885/pulzo/' + adSeccion, googletag.enums.OutOfPageFormat.INTERSTITIAL).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit', 'Interstitial').addService(googletag.pubads());
 
 						//preHome
 						if(prehomeEnable){
-							gptadslots[161] = googletag.defineSlot('/11420885/' + adsPreName + 'PreHome', [1,1], 'DIS_Intersticial_GO_Web').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							gptadslots[161] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [1,1], 'DIS_Intersticial_GO_Web').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit', 'PreHome').addService(googletag.pubads());
 						}
 					}
 
@@ -347,15 +347,15 @@
 					if(numArticle == 1){
 						//AD InImage
 						//gptadslots[35] = googletag.defineSlot('/11420885/'+ adsPreName +'In-Image', [[1050, 100]], 'pautaImg').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-						gptadslots[35] = googletag.defineSlot('/11420885/DE_DIS_'+getSectionAdName(adSeccion, 2)+"_Articulo_Leaderboard_1", [[728, 90]], 'Articulo_Medium_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[35] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'Articulo_Medium_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Leaderboard_1')addService(googletag.pubads());
 					}else{
-						gptadslots[35] = googletag.defineSlot('/11420885/DE_DIS_'+getSectionAdName(adSeccion, 2)+"_Articulo_Scroll_Leaderboard_1", [[728, 90]], 'Articulo_Leaderboard_'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[35] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'Articulo_Leaderboard_'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Scroll_Leaderboard_1').addService(googletag.pubads());
 					}
 
 					//Native ?
 					if(native == 1){
 						//gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_NativeBanner', [[1280, 525], [1280, 370], [1280, 470]], 'divNative-'+numArticle).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-						gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_NativeBanner', [[1280, 370]], 'divNative-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[10] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[1280, 370]], 'divNative-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_NativeBanner').addService(googletag.pubads());
 
 						if(color != ""){
 							$('#divImgNative-'+numArticle).css('background', 'url("'+ color +'")');
@@ -386,7 +386,7 @@
 					@if($active_float > 0)
 						//Pauta flotante
 						if(numArticle == 1){
-							gptadslots[11] = googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Floating', [1280, 90], 'Preview_Floating_Desktop_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							gptadslots[11] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [1280, 90], 'Preview_Floating_Desktop_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BarraBottom_Floating').addService(googletag.pubads());
 							if(native != 1){
 								firstAd = 'Preview_Floating_Desktop_1_1_1';
 							}
@@ -401,22 +401,22 @@
 					@if($active_interstitial > 0)
 						if(numArticle == 1){
 							console.log('Llamado prehome');
-							gptadslots[21] = googletag.defineSlot('/11420885/'+ adsPreName +'PreHome', [1, 1], 'PULZO_INTERSTITIAL_INHOUSE').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							gptadslots[21] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [1, 1], 'PULZO_INTERSTITIAL_INHOUSE').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','PreHome').addService(googletag.pubads());
 							richmedia = true;  
 						}
 					@endif
 
 					//Inread
 					if($('#inread').val() == 1 && numArticle == 1){
-						gptadslots[2] = googletag.defineSlot('/11420885/'+ adsPreName +'Inread', [1, 1], 'Inread_Inhouse_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[2] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [1, 1], 'Inread_Inhouse_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Inread').addService(googletag.pubads());
 						$('.INREAD_CONTAINER').insertAfter($('#principal-1 > p')[3]);
 					}
 
 					
 
 					if((articleType == 'gallery' || articleType == 'galeria') && Config.variables.device == 'desktop'){
-						gptadslotsRefresh[1] = googletag.defineSlot('/11420885/DE_DIS_'+getSectionAdName(adSeccion, 2)+'_Carrusel_Articulo', [300, 250], 'DE_DIS_Galeria_Articulo').setTargeting('redactor', redactor ).setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-						gptadslots[40] = googletag.defineSlot('/11420885/DE_DIS_'+getSectionAdName(adSeccion, 2)+"_Articulo_Leaderboard_1", [[728, 90], [970, 90]], 'DE_DIS_Galeria_Articulo_2').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslotsRefresh[1] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [300, 250], 'DE_DIS_Galeria_Articulo').setTargeting('redactor', redactor ).setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Carrusel_Articulo').addService(googletag.pubads());
+						gptadslots[40] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], 'DE_DIS_Galeria_Articulo_2').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Leaderboard_1').addService(googletag.pubads());
 						gptadslots[3] = gptadslotsRefresh[1];
 					}
 
@@ -486,7 +486,7 @@
 
 					//Llamado al intext
 					if(numArticle == 1 && Config.variables.intext == 1){
-						gptadslots[2] = googletag.defineSlot('/11420885/DE_VID_'+ getSectionAdName(adSeccion, 2,numArticle) +'_Articulo_Intext', [[1, 1], [640, 480], [640, 360]], 'divIntext-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[2] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[1, 1], [640, 480], [640, 360]], 'divIntext-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Intext').addService(googletag.pubads());
 						firstAd = 'divIntext-1';
 					}
 
@@ -501,13 +501,13 @@
 					/* Carga dinamica en el body de pauta programatica */
 					for(var i= 1; i < counterProgramaticAd;i++){
 						if($('#div-Ad-Body-'+numArticle+i).length  == 1){
-							gptadslots.push(googletag.defineSlot('/11420885/'+adsNamesDynamic[i], [[728, 90]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
+							gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit',adsNamesDynamic[i]).addService(googletag.pubads()));
 						}
 					}	
 
 					@if($noads == false)	
 						//Pauta de fondo
-						gptadslots.push(googletag.defineSlot('/11420885/'+ adsPreName +'Skyscraper', [[160, 600], [300, 600]], 'Article_Desktop_Skycraper_'+numArticle).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
+						gptadslots.push(googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[160, 600], [300, 600]], 'Article_Desktop_Skycraper_'+numArticle).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Skyscraper').addService(googletag.pubads()));
 						
 					@endif
 					
