@@ -347,7 +347,7 @@
 					if(numArticle == 1){
 						//AD InImage
 						//gptadslots[35] = googletag.defineSlot('/11420885/'+ adsPreName +'In-Image', [[1050, 100]], 'pautaImg').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-						gptadslots[35] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'Articulo_Medium_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Leaderboard_1')addService(googletag.pubads());
+						gptadslots[35] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'Articulo_Medium_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Leaderboard_1').addService(googletag.pubads());
 					}else{
 						gptadslots[35] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'Articulo_Leaderboard_'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Scroll_Leaderboard_1').addService(googletag.pubads());
 					}
