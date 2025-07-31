@@ -711,9 +711,9 @@
 					googletag.cmd.push(function(){  
 
 							if(numArticle == 1){
-								gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[300, 250]], 'MO_DIS_Articulo_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Medium').addService(googletag.pubads());
+								gptadslots[0] =  googletag.defineSlot('/11420885/'+ adsPreName1 +'Medium', [[300, 250]], 'MO_DIS_Articulo_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 							}else{
-								gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[300, 250]], 'Article_Mobile_'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Medium').addService(googletag.pubads());
+								gptadslots[0] =  googletag.defineSlot('/11420885/'+ adsPreName1 +'Medium', [[300, 250]], 'Article_Mobile_'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 							}
 
 							//llamado MGID
@@ -731,7 +731,7 @@
 							
 							//Llamado al intext
 							if(numArticle == 1 && Config.variables.intext){
-								gptadslots[1] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[1, 1], [300, 250], [320, 180]], 'divIntext-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Articulo_Intext').addService(googletag.pubads());
+								gptadslots[1] = googletag.defineSlot('/11420885/MO_VID_'+ getSectionAdName(adSeccion, 2,numArticle) +'_Articulo_Intext', [[1, 1], [300, 250], [320, 180]], 'divIntext-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 								firstAd = 'divIntext-1';
 							}
 
@@ -745,9 +745,9 @@
 								if($('#div-Ad-Body-'+numArticle+i).length  == 1){
 								
 									if(i==1){
-										gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit',adsNamesDynamic[i]).addService(googletag.pubads()));
+										gptadslots.push(googletag.defineSlot('/11420885/' + adsNamesDynamic[i], [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
 									}else{
-										gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit',adsNamesDynamic[i]).addService(googletag.pubads()));
+										gptadslots.push(googletag.defineSlot('/11420885/' + adsNamesDynamic[i], [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
 									}
 								}
 								
