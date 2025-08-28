@@ -506,7 +506,7 @@
 
 					@if($noads == false)	
 						//Pauta de fondo
-						gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[160, 600], [300, 600]], 'Article_Desktop_Skycraper_'+numArticle).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Skyscraper').addService(googletag.pubads()));
+						gptadslots.push(googletag.defineSlot('/11420885/'+ adsPreName +'Skyscraper', [[160, 600], [300, 600]], 'Article_Desktop_Skycraper_'+numArticle).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
 						
 					@endif
 					
