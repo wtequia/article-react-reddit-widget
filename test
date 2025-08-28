@@ -9,43 +9,15 @@
 
 <script>
 @minify('js')
+	console.log('ad articleDesktop file');
 
 	const adSeccion = Config.variables.section;
-		
-
-	@if(!in_array($section, $envSectionNoAds) && $article->censorship == 0)
-
-		@if($active_float > 0)
-			function showHideAdParentFunction(){
-				if($(".PULZO-AD-FLOATING iframe").height() == 100){
-					$(".PULZO-AD-FLOATING iframe").css("height", "250px");
-				}else{
-					$(".PULZO-AD-FLOATING iframe").css("height", "100px");
-				}
-
-				console.log('llamado a showHideAdParentFunction');
-			}
-
-			window.addEventListener("message", function(event) {
-
-				//console.log(event.origin);
-
-				// Validar que el mensaje proviene del dominio esperado
-				//if (!event.origin.endsWith("safeframe.googlesyndication.com")) return;
-				
-				// Verificar si el mensaje es el esperado
-				if (event.data === "openCloseAd") {
-					showHideAdParentFunction(); // Llamamos la función en el padre
-				}
-			});
-
-
-		@endif
-
-
-	//if(!sectionNoAds.includes(adSeccion)){
+	const nid = $('#articleShareData1').data('article-id');
 	
-		//var adSeccion = $('#currentSection').val();
+	//if(!sectionNoAds.includes(adSeccion)){
+	@if(!in_array($section, $envSectionNoAds) && $article->censorship == 0)
+		
+	
 		let numP = 0;
 		let numAds = 0;
 		let slots = [];
@@ -78,22 +50,29 @@
 				counterProgramaticAd = 1;
 			}
 
-			const numParrafos =  $('#principal-'+ numArticle +' >  p').length;
+			const numParrafos =  $('#principal-'+ numArticle +' > .article-body-left > p').length;
 			//const numParrafos =  $('#principal-1 > .article-body-left > p').length;
 			let articlesAds = [];
-			let initialProgramaticAdPosition = 2;
-			let position = 0;
+			let initialProgramaticAdPosition = 3;
+			let position = 3;
 			let index = 1;
 
 			if(numArticle == 1){
 				//Si es el primer articulo, la primera pauta comienza en el parrafo 6
-				initialProgramaticAdPosition = 6;
+				initialProgramaticAdPosition = 9;
 				index = 3;
-				intextPosition = 5;
+				intextPosition = 8;
+
+				//native activo no llamar al player
+				if(Config.variables.native == 1){
+					initialProgramaticAdPosition = 6;
+					intextPosition = 5;
+					index = 2;
+				}
 
 				//Check if include Connatix
-				if(numParrafos > 3 && Config.variables.section != 'contenido-patrocinado'){
-					articlesAds.push({'name': 'membrana', 'position': 3, 'firstLoad': true});
+				if(numParrafos > 5  && Config.variables.section != 'contenido-patrocinado'){
+					articlesAds.push({'name': 'membrana', 'position': 5, 'firstLoad': true});
 				}
 
 				//Check if include Intext
@@ -104,77 +83,31 @@
 			}
 
 			//check if include MGID
-			if(numParrafos > 1){
-				articlesAds.push({'name': 'mgid', 'position': 1, 'firstLoad': false});
+			if(numParrafos > 2){
+				articlesAds.push({'name': 'mgid', 'position': 2, 'firstLoad': false});
 			}
 
 			//Check if include Programatic
-			const numProgramaticAd = Math.trunc((numParrafos - initialProgramaticAdPosition) / 2);
+			const numProgramaticAd = Math.trunc((numParrafos - initialProgramaticAdPosition) / 3);
+			
+
 			for (var i = 0; i < numProgramaticAd; i++) {
-				position = (2 * (index + 1)) - 1;
+				position = (3 * (index + 1)) - 1;
 				articlesAds.push({'name': 'programatic', 'position': position, 'firstLoad': false});
 				index++;
 			}
 
-
-			console.log('articlesAds', articlesAds);
+			
+			console.log('articlesAds desk', articlesAds);
 			renderAdSpot(articlesAds, numArticle);
 		}
 
-
-		function createAdsSpot(numArticle){
-			//Pauta cada 3 parrafos...
-			var position = 2;
-
-			//Limpiar parrafos...
-			$('#principal-'+ numArticle +' p').each(function(){
-				if ($(this).html() == ""){
-					$(this).remove();
-				}
-			});	
-
-			if(numArticle == 1 && Config.variables.intext == 1){
-				//Solo creamos el div del intext si esta encendido ya el articulo tiene al menos 3 parrafos
-				if ($('#principal-'+ numArticle +' > p').length >= 3) {
-					//Creamos el div del intext en el 4 parrafo...
-					slotDiv = document.createElement('div');
-					slotDiv.id = 'divIntext-'+numArticle; 
-					//InsertAfter
-					var nodo = $('#principal-'+ numArticle +' > p')[1].parentNode.insertBefore(slotDiv, $('#principal-'+ numArticle +' > p')[2].nextSibling);
-				}
-
-				//Si el intext esta encendido la primera pauta comienza en el parrafo 9
-				position = 5;
-			}
-
-			
-			//Create div container for ad
-			for(var i= 1; i <=numAds; i++){
-				
-				if($('#principal-'+ numArticle +' > p')[position] != undefined){
-					slotDiv = document.createElement('div');
-					slotDiv.id = 'div-Ad-Body-'+numArticle+i;
-					slotDiv.className = 'publicidad';
-					//slotDiv.appendChild( document.createTextNode("Publicidad") );
-					
-					// si noAds no crear posicion para leaderboard2
-					if (!(noAds && i == 2)) {
-						var nodo = $('#principal-' + numArticle + ' > p')[position].parentNode.insertBefore(slotDiv, $('#principal-' + numArticle + ' > p')[position].nextSibling);
-					}
-				}
-				
-				position = position + 3;
-
-				if (position >= $('#principal-' + numArticle + ' > p').length) {
-					break;
-				}
-			}
-			
-		}
+		
+		
 
 		function mostrarAdInread(){
 
-			if ( $('#principal-1 > p').length >= 4) {
+			if ( $('#principal-1 > .article-body-left > p').length >= 4) {
 				setTimeout(function () {
 					//Se llamo la pauta correctamente ?? evita el recuadro negro si no hay pauta por DFP
 					if ($('#Inread_Inhouse_1_1_1').css('display')  != 'none' ) {
@@ -195,41 +128,39 @@
 
 		function DFPAds(numArticle){
 
-			var native = $('#articleShareData'+numArticle).data('article-native');
-			var color = $('#articleShareData'+numArticle).data('article-color');
-			var nid = $('#articleShareData'+numArticle).data('article-id');
+			let native = $('#articleShareData'+numArticle).data('article-native');
+			let color = $('#articleShareData'+numArticle).data('article-color');
+			let nid = $('#articleShareData'+numArticle).data('article-id');
+			
 			
 			
 
-			numP = $('#principal-'+numArticle).children('p').length;
-			numAds = (numP - 2) / 3;
-			
+			numP = $('#principal-'+numArticle+' > .article-body-left > p').length;
+			numAds = (numP - 2) / 3	;
+
 			
 			//new divs
 			if($('#showAd-'+numArticle).val() == 0 ){
+				//createAdsSpot(numArticle);
 				createAdsSpotNew(numArticle);
 			}
-				
-			
 			
 			showAdsDevice(native, color, nid, numArticle);
-
-		
 			
 
 		} //End function...
-		
+
 		//Ejecutamos para el artículo 1
 		function mostrarAdsArticulo(numArticle){
-
+			//console.log('entra a NO censurado', $('#showAd-'+numArticle).val(1) );
 			//Solo se muestra la pauta si el artículo no esta censurado
 			if ($('#articleShareData'+numArticle).data('article-censorship') == 0 && $('#active_adblocker').val() == 0){
 				
 				switch($('#showAd-'+numArticle).val()){
 					case "0":
+						
 						//llamado de pauta a la cabeza del articulo...
 						DFPAds(numArticle);
-						
 						labelEnPublicidad(numArticle);
 
 						if($('#inread').val() == 1 && numArticle == 1){
@@ -240,9 +171,12 @@
 						
 					break;
 					case "1":
+						console.log("ESTA ENTRANDO AL SWITCH 1");
+						
 						//NO se ha llamado la pauta en el cuerpo...
 					break;
 					case "2":
+						
 						//llamado al cuerpo, sin pasar por la cabeza
 						DFPAds(numArticle);
 						
@@ -251,6 +185,7 @@
 					break;
 				}
 				
+				console.log('Fin de la ejecucion de pauta');
 				
 			}
 		}
@@ -262,21 +197,16 @@
 				let blockName = 'Floating_Desktop_1_1_1';
 				let adSeccion = $('#articleShareData1').data('article-section');
 				let adsPreName = getSectionAdName(adSeccion, 1, 1);
-				var gptadslots = [];
-				var tags = $('#articleShareData1').data('article-tags').split(',');
-				var nid = $('#articleShareData1').data('article-id');
+				let gptadslots = [];
+				let tags = $('#articleShareData1').data('article-tags').split(',');
+				let nid = $('#articleShareData1').data('article-id');
 				let redactor = $('#articleShareData1').data('article-redactor');
 				
 
-				if(Config.variables.device != 'desktop'){
-					blockName = 'Floating_Mobile_1_1_1';
-				}
-
 				googletag.cmd.push(function(){  
-					gptadslots[30] = googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Floating', [320, 100], blockName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
+					gptadslots[30] = googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Floating', [1, 1], blockName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
 					googletag.pubads().refresh([gptadslots[30]]);
 					//googletag.display( blockName );
-
 				});
 						
 			}//end adblocker check
@@ -285,56 +215,12 @@
 		}//End function
 
 
-		function pautaGaleriaRefresh(){
 
-			var numArticle = $('#articleActive').val();
 
-			var gptadslots = [];
-			var nid = $('#articleShareData'+numArticle).data('article-id');
-			let redactor = $('#articleShareData'+numArticle).data('article-redactor');
-			var adSeccion = $('#articleShareData'+numArticle).data('article-section');
-			var tags = $('#articleShareData'+numArticle).data('article-tags').split(',');
 
-			if(gptadslotsRefresh[1] == undefined){
-					gptadslotsRefresh[1] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [ [300, 50], [320, 50]],spotDivName).setTargeting('redactor', redactor ).setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-				
-				
-				//console.log('entre por aqui 1');
-			}else{
-				googletag.cmd.push(function(){
-					gptadslotsRefresh[1].setTargeting('refreshed_slot', 'true').setTargeting('redactor', redactor ).setTargeting('interests', tags);
-					googletag.pubads().refresh( [ gptadslotsRefresh[1] ] );
-				});
-
-			}
-
-			googletag.pubads().refresh( [ gptadslotsRefresh[1] ] );
-
-			
-
-			console.log("refresh pauta");
-		}
 
 		function showBottomStickyAd(){
-
-			let showAd = true;
-
-			//Barra flotante
-			if(Config.variables.flotante != 0)
-				showAd = false;
-
-			//censurado
-			if($('#articleShareData1').data('article-censorship') != 0)
-				showAd = false;
-
-			//shorthand o galeria
-			if(($('#articleShareData1').data('article-type') != 'article') && ($('#articleShareData1').data('article-type') != 'receta') && ($('#articleShareData1').data('article-type') != 'aliados'))
-				showAd = false;
-
-			
-
-				
-				if( showAd ){
+				if(Config.variables.flotante == 0 && $('#articleShareData1').data('article-censorship') == 0 ){
 
 					var tags = $('#articleShareData1').data('article-tags').split(',');
 
@@ -343,480 +229,359 @@
 						var adSeccion = $('#articleShareData1').data('article-section');
 						var nid = $('#articleShareData1').data('article-id');
 						let redactor = $('#articleShareData1').data('article-redactor');
-						var adsPreName = getSectionAdName(adSeccion, 1,1);
-						//required variable for refresh
-						var adDisplaySlot = 'SliderAd';
-
-						var slider = true;
-						var articleData = {
-							adSeccion: adSeccion,
-							nid: nid,
-							tags: tags
-						}
-
+						var adsPreName = getSectionAdName(adSeccion, 1, 1);
 						var REFRESH_KEY = 'refresh';
 						var REFRESH_VALUE = 'true';
 
-
-						if(slider){
-
-							//gptadslots1 = googletag.defineOutOfPageSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting(REFRESH_KEY,REFRESH_VALUE).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
-								gptadslots1 = googletag.defineOutOfPageSlot('/11420885/pulzo/' + adSeccion, googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BarraBottom_Flotante').addService(googletag.pubads());
-							
-							googletag.pubads().refresh([gptadslots1]);
-							//googletag.display( 'SliderAd' );
-
-							//Start refresh
-							/*
-							var SECONDS_TO_WAIT_AFTER_VIEWABILITY = 15;
-							googletag.pubads().addEventListener('impressionViewable', function(event) {
-								var slot = event.slot;
-								if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
-									setTimeout(function() {
-										console.log("Pasaron 15 segundos");
-										if (slot.getTargeting('refreshed_slot')) {
-											slot.setTargeting('refreshed_slot', 'true');
-										}
-										googletag.pubads().refresh([slot]);
-									}, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000);
-								}
-							});
-							*/
-							//End refresh
+						//gptadslots1 = googletag.defineSlot('/11420885/'+ adsPreName +'Slider', [1, 1], 'SliderAd').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
+						//gptadslots1 = googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', [728, 90], 'divBarraAd').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
 						
-							googletag.pubads().addEventListener('slotRenderEnded', function(event) { 
-								var slot = event.slot;
-								if(slot.getSlotElementId() == 'SliderAd'){
-									console.log('slider renderizado');
-									if(event.isEmpty){
-										console.log('slider vacio, renderizar barra');
-										callBottomAd(adsPreName, articleData);
+						//gptadslots1 = googletag.defineOutOfPageSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting(REFRESH_KEY,REFRESH_VALUE).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
+							gptadslots1 = googletag.defineOutOfPageSlot('/11420885/pulzo/' + adSeccion, googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BarraBottom_Flotante').addService(googletag.pubads());
+						
+
+
+						googletag.pubads().collapseEmptyDivs();
+						googletag.pubads().disableInitialLoad();
+						googletag.pubads().enableSingleRequest();
+						googletag.pubads().refresh([gptadslots1]);
+						googletag.enableServices();
+						//googletag.display( 'SliderAd' );
+						//googletag.display( 'divBarraAd' );
+						/*
+						$('#divBarraAd').show();
+						setTimeout(function(){ 
+							$('#divBarraAd').remove();
+						}, 10000);
+						*/
+
+						//Start refresh
+						/*
+						var SECONDS_TO_WAIT_AFTER_VIEWABILITY = 15;
+						googletag.pubads().addEventListener('impressionViewable', function(event) {
+							var slot = event.slot;
+							if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
+								setTimeout(function() {
+									if (slot.getTargeting('refreshed_slot')) {
+										slot.setTargeting('refreshed_slot', 'true');
 									}
-								}
-							});
-
-
-						}else{
-							callBottomAd(adsPreName, articleData);
-						}
-
-						
-						
+									googletag.pubads().refresh([slot]);
+								}, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000);
+							}
+						});
+						*/
+						//End refresh
 
 
 					});
 				}
-				}
-
-			function callBottomAd(adsPreName, articleData){
-
-				console.log('Llamado a la pauta sticky inferior');
-
-				var REFRESH_KEY = 'refresh';
-				var REFRESH_VALUE = 'true';
-
-				//gptadslots = googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', [[320, 100],[320, 50]], 'divBarraAd').setTargeting(REFRESH_KEY,REFRESH_VALUE).setTargeting('seccion', articleData.adSeccion ).setTargeting('nid', articleData.nid ).setTargeting('interests', articleData.tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
-
-				//gptadslots = googletag.defineOutOfPageSlot('/11420885/'+ adsPreName +'BarraBottom_Flotante', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting(REFRESH_KEY,REFRESH_VALUE).setTargeting('seccion', articleData.adSeccion ).setTargeting('nid', articleData.nid ).setTargeting('interests', articleData.tags).setTargeting('content-type', articleContentType(1)).addService(googletag.pubads());
-					gptadslots = googletag.defineOutOfPageSlot('/11420885/pulzo/' + adSeccion, googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR).setTargeting('redactor', redactor ).setTargeting('seccion', articleData.adSeccion ).setTargeting('nid', articleData.nid ).setTargeting('interests', articleData.tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BarraBottom_Flotante').addService(googletag.pubads());
-				
-				
-				googletag.pubads().collapseEmptyDivs();
-				googletag.pubads().disableInitialLoad();
-				googletag.pubads().enableSingleRequest();
-				googletag.pubads().refresh([gptadslots]);
-				googletag.enableServices()
-				//googletag.display( 'divBarraAd');
-
-
-				//$('#divBarraAd').show();
-				//Start refresh
-				/*
-				var SECONDS_TO_WAIT_AFTER_VIEWABILITY = 120;
-				googletag.pubads().addEventListener('impressionViewable', function(event) {
-					var slot = event.slot;
-					if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
-						setTimeout(function() {
-							if (slot.getTargeting('refreshed_slot')) {
-								slot.setTargeting('refreshed_slot', 'true');
-							}
-							googletag.pubads().refresh([slot]);
-						}, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000);
-					}
-				});
-				*/
-				//End refresh
-				//$('#divBarraAd').show();
-
-				/* setTimeout(function(){ 
-					//$('#divBarraAd').remove();
-					$('#closeStickyBottomAd').show();
-				}, 1000); */
 			}
-			
+
 
 			function showAdsDevice(native, color, nid, numArticle){
-				var gptadslots = [];
-
-				var adSeccion = $('#articleShareData'+numArticle).data('article-section');
-				var adsPreName = getSectionAdName(adSeccion, 1,numArticle);
-				var articleType = $('#articleShareData'+numArticle).data('article-type');
-				var tags = $('#articleShareData'+numArticle).data('article-tags').split(',');
+				let gptadslots = [];
+				let adSeccion = $('#articleShareData'+numArticle).data('article-section');
+				let articleType = $('#articleShareData'+numArticle).data('article-type');
 				let redactor = $('#articleShareData'+numArticle).data('article-redactor');
-				var richmedia = true;
-				
+				let adsPreName = getSectionAdName(adSeccion, 1, numArticle);
+				let tags = $('#articleShareData'+numArticle).data('article-tags').split(',');
+				let richmedia = true;
+				let showTime = document.getElementById('backSegmentado');
 
-				googletag.cmd.push(function(){  
+				googletag.cmd.push(function(){
 
 					googletag.pubads().addEventListener('slotRenderEnded', function(event) {
-						var slot = event.slot;
+						let slot = event.slot;
+						let firstAd = '';
+
+						//console.log("evento render ad ", slot.getSlotElementId());
+
 						if(slot.getSlotElementId() == 'divNative-1'){
 							console.log('native renderizado');
-							
 							if(event.isEmpty){
 								console.log('native sin anuncios :(')
-								$('#divNative-1').slideUp('slow', function(){
-									$('#divNative-1').remove()
-								});
-								
-								$('.articleHeaderFixed').prepend('<div id="articleMobileContainerAd"><div id="articleMobileStickyAd"></div></div>');
-								
+								$('#divContentFixedNative-1').slideUp('slow', function(){
+									$('#divContentFixedNative-1').remove()
+								})
+								$('.articleHeaderFixed').prepend('<div id="articleMobileContainerAd"><div id="articleDesktopStickyAd"></div></div>')
 								
 								
-								spotDivName = 'articleMobileStickyAd';
-
-								if($('#articleShareData1').data('article-type') == 'galeria'){
-										gptadslotsRefresh[1] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [ [300, 50], [320, 50]],spotDivName).setTargeting('redactor', redactor ).setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-									
-									
-									gptadslots[0] = gptadslotsRefresh[1];
-									//console.log('entre por aqui 2');
-								}else{
-										gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [ [300, 50],[320, 50]],spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-									
-									
-									//console.log('entre por aqui 3');
-								}
-
-
+								spotDivName = 'articleDesktopStickyAd';
+									gptadslots[10] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
 								
 								richmedia = false;
 								native=0
-								Config.variables.native = 0
-								googletag.pubads().refresh([gptadslots[0]]);
+								Config.variables.native = 0;
+								googletag.pubads().refresh([gptadslots[10]]);
 
-
-								//Comportamiento del header
 								initHeader(1);
 							}
-
+							
 						}else if(slot.getSlotElementId() == 'pautaImg'){
-							if(!event.isEmpty ){
+							if(!event.isEmpty){
 								$('#btn-cerrar-pauta').show();
-							} else {
-								$('.center-article-figure.figurePauta').removeClass('figurePauta');
 							}
-						} else if(slot.getSlotElementId() == 'Floating_Mobile_1_1_1'){
-							$("#Floating_Mobile_1_1_1").fadeIn('slow');
-							$('html').css('overflow-y', 'hidden');
 						}
 
 						if(slot.getSlotElementId() == 'DIS_Intersticial_GO_Web' && !event.isEmpty){
-							document.getElementById('DIS_Intersticial_GO_Web').getElementsByTagName('iframe')[0].setAttribute('allow', 'autoplay')
 							document.getElementById('close-prehome-btn').style.display = 'flex';
 						}
+						
 						if(slot.getSlotElementId() == 'PULZO_INTERSTITIAL_INHOUSE' && !event.isEmpty){
 							document.getElementById('close-prehome-btn').style.display = 'flex';
 						}
+						
 					});
 
 					//cargar interstitial de google
 					if(numArticle == 1){
-						gptadslots[61] = googletag.defineOutOfPageSlot('/11420885/pulzo/' + adSeccion, googletag.enums.OutOfPageFormat.INTERSTITIAL).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Interstitial').addService(googletag.pubads());
+						gptadslots[61] = googletag.defineOutOfPageSlot('/11420885/' + adsPreName  + 'Interstitial', googletag.enums.OutOfPageFormat.INTERSTITIAL).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+
 						//preHome
 						if(prehomeEnable){
 							gptadslots[161] = googletag.defineSlot('/11420885/' + adsPreName + 'PreHome', [1,1], 'DIS_Intersticial_GO_Web').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 						}
 					}
+
 					
-					
-						var firstAd = '';
+					if(numArticle == 1){
+						//AD InImage
+						//gptadslots[35] = googletag.defineSlot('/11420885/'+ adsPreName +'In-Image', [[1050, 100]], 'pautaImg').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[35] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'Articulo_Medium_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Leaderboard_1').addService(googletag.pubads());
+					}else{
+						gptadslots[35] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'Articulo_Leaderboard_'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Leaderboard_'+numArticle).addService(googletag.pubads());
+					}
 
-						//Native ?
-						if(native == 1){
+					//Native ?
+					if(native == 1){
+						//gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_NativeBanner', [[1280, 525], [1280, 370], [1280, 470]], 'divNative-'+numArticle).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[10] = googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_NativeBanner', [[1280, 370]], 'divNative-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 
-							
-							if(Config.variables.native_plus == 1){
-								console.log(native_plus);
-								gptadslots.push( googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_NativeBanner', [[480, 225],[320, 150]], 'divNative-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()) );
-							}else{
-								gptadslots.push( googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_NativeBanner', [[320, 150]], 'divNative-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()) );
-							}
-							
-
-							firstAd = 'divNative-'+numArticle
-							$('#pulzo-header').removeClass('fixedtop');
-							$('#divNative-'+numArticle).css('background-color', color);
-							
-							console.log('native si', native);
-							
-						}else{
-							var spotDivName = 'divNative-'+numArticle;
-							richmedia = false;
-							if(numArticle ==  1){
-								spotDivName = 'articleMobileStickyAd';
-								/* Primera carga de pauta tradicional */
-								if($('#articleShareData1').data('article-type') == 'galeria'){
-										gptadslotsRefresh[1] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[300, 50], [320, 50]],spotDivName).setTargeting('redactor', redactor ).setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-									
-									gptadslots[0] = gptadslotsRefresh[1];
-									//console.log('entre por aqui 4');
-								}else{
-										gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [ [300, 50], [320, 50]],spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
-									
-									//console.log('entre por aqui 5, cambio x 50');
-								}
-								
-							}else{
-								/* Primera carga de pauta tradicional articulo scroll */
-									gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [ [300, 50], [320, 50]],spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Scroll_BannerTop_General').addService(googletag.pubads());
-								
-								
-								//console.log('entre por aqui 6');
-							}
-							
-							firstAd = spotDivName;
-
-							console.log('native no', native);
-							console.log('pauta', adsPreName);
-							console.log('pautas', spotDivName);
+						if(color != ""){
+							$('#divImgNative-'+numArticle).css('background', 'url("'+ color +'")');
 						}
+							
+						//firstAd = 'Native_Desktop_1280_470_1';
+						firstAd = 'divNative-'+numArticle;
+					}else{
+						spotDivName = 'divNative-'+numArticle;
+						if(numArticle ==  1){
+							spotDivName = 'articleDesktopStickyAd';
+								gptadslots[10] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+							
+							
+							
+							richmedia = false;
+						}else{
+							gptadslots[10] = googletag.defineSlot('/11420885/pulzo/'+ adSeccion, [[728, 90],[970,250], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+							richmedia = false;
+						}
+							
+						//firstAd = 'Article_Desktop_970_250_1';
+						firstAd = spotDivName;
+						
+					}
 
-						//Pushdown ?
-						@if($pushdown > 0)
-							if(numArticle == 1){
-								gptadslots.push( googletag.defineSlot('/11420885/'+ adsPreName +'BannerTop_Pushdown', [300, 250], 'Pushdown_Mobile_300_250_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
-								pushDownAd();
-								firstAd = 'Pushdown_Mobile_300_250_1';
-							}
-						@endif
 
-						//Pauta flotante ?
-						@if($active_float > 0)
-							if(numArticle == 1){
-								$('#floatadcover').css('display', 'none');
-								gptadslots.push( googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Floating', [320, 100], 'Preview_Floating_Mobile_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
-								firstAd = 'Preview_Floating_Mobile_1_1_1';
-								//floatingAd();
-								document.getElementById('bottom-ad-close-button-movil').addEventListener('click', function(){
-									$('.PULZO-AD-FLOATING').css('display', 'none');
-									$('.PULZO-AD-FLOATING').removeClass('PULZO-AD-FLOATING')
-								})
+					@if($active_float > 0)
+						//Pauta flotante
+						if(numArticle == 1){
+							gptadslots[11] = googletag.defineSlot('/11420885/'+ adsPreName +'BarraBottom_Floating', [1280, 90], 'Preview_Floating_Desktop_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							if(native != 1){
+								firstAd = 'Preview_Floating_Desktop_1_1_1';
 							}
-						@endif
+							//floatingAd();
+							document.getElementById('bottom-ad-close-button-desktop').addEventListener('click', function(){
+								$('.PULZO-AD-FLOATING').css('display', 'none');
+								$('.PULZO-AD-FLOATING').removeClass('PULZO-AD-FLOATING')
+							})
+						}
+					@endif
+
+					@if($active_interstitial > 0)
+						if(numArticle == 1){
+							console.log('Llamado prehome');
+							gptadslots[21] = googletag.defineSlot('/11420885/'+ adsPreName +'PreHome', [1, 1], 'PULZO_INTERSTITIAL_INHOUSE').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							richmedia = true;  
+						}
+					@endif
+
+					//Inread
+					if($('#inread').val() == 1 && numArticle == 1){
+						gptadslots[2] = googletag.defineSlot('/11420885/'+ adsPreName +'Inread', [1, 1], 'Inread_Inhouse_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						$('.INREAD_CONTAINER').insertAfter($('#principal-1 > p')[3]);
+					}
+
+					
+
+					if((articleType == 'gallery' || articleType == 'galeria') && Config.variables.device == 'desktop'){
+						gptadslotsRefresh[1] = googletag.defineSlot('/11420885/DE_DIS_'+getSectionAdName(adSeccion, 2)+'_Carrusel_Articulo', [300, 250], 'DE_DIS_Galeria_Articulo').setTargeting('redactor', redactor ).setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						gptadslots[40] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], 'DE_DIS_Galeria_Articulo_2').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Leaderboard_1').addService(googletag.pubads());
+						gptadslots[3] = gptadslotsRefresh[1];
+					}
+
+					
+					//console.log("Slots", gptadslots);
+					//console.log("PRIMERA PAUTA: ",firstAd);
+
+					//if(richmedia || numArticle > 1){
+						googletag.pubads().collapseEmptyDivs();
+						googletag.pubads().enableSingleRequest();
+						googletag.pubads().disableInitialLoad();
+						googletag.enableServices();
+						googletag.pubads().refresh(gptadslots);
+						googletag.display( firstAd );
 
 						@if($active_interstitial > 0)
-							if(numArticle == 1){
-								gptadslots[21] = googletag.defineSlot('/11420885/'+ adsPreName +'PreHome', [1, 1], 'PULZO_INTERSTITIAL_INHOUSE').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).addService(googletag.pubads());
-								richmedia = true;  
-							}
+							setTimeout(function(){ 
+								if($('#PULZO_INTERSTITIAL_INHOUSE iframe').length > 0){
+									$('#PULZO_INTERSTITIAL_INHOUSE').addClass('DE_DIS_PreHome');
+								}
+							}, 2000);	
 						@endif
+					//}
 
-						@if($inread > 0)
-							if(numArticle == 1){
-								//Inread
-								let adsPreNameInread = getSectionAdName(adSeccion, 1,numArticle,1);
-								gptadslots.push( googletag.defineSlot('/11420885/'+ adsPreNameInread +'Inread', [1, 1], 'Inread_Inhouse_1_1_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
-								$('.INREAD_CONTAINER').insertAfter($('#principal-1 > p')[3]);
-								console.log("Llamado inread: "+adsPreName +'Inread');
-							}
-						@endif
+				}); //End googletag.cmd.push
 
-						if(articleType == 'gallery' || articleType == 'galeria' ){
-							//gptadslotsRefresh[1] = googletag.defineSlot('/11420885/MO_DIS_'+getSectionAdName(adSeccion, 2)+'_Carrusel_Articulo', [300, 250], 'MO_DIS_Galeria_Articulo').setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-							//gptadslots[20] = gptadslotsRefresh[1];
-							gptadslots[20] = googletag.defineSlot('/11420885/MO_DIS_'+getSectionAdName(adSeccion, 2)+'_Carrusel_Articulo', [300, 250], 'MO_DIS_Galeria_Articulo').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-							gptadslots[21] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [300, 250], 'MO_DIS_Galeria_Articulo_2').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Leaderboard_1').addService(googletag.pubads());
-							
-						}
-
-
-						//if(richmedia || numArticle > 1){
-							googletag.pubads().collapseEmptyDivs();
-							googletag.pubads().enableSingleRequest();
-							googletag.pubads().disableInitialLoad();
-							googletag.enableServices();
-							googletag.pubads().refresh(gptadslots);
-							googletag.display( firstAd );
-
-
-							@if($active_interstitial > 0)
-								setTimeout(function(){ 
-									if($('#PULZO_INTERSTITIAL_INHOUSE iframe').length > 0){
-										$('#PULZO_INTERSTITIAL_INHOUSE').addClass('DE_DIS_PreHome');
-									}
-								}, 2000);	
-							@endif
-						//}
-						
-
-					});
-
-					
-					$('#showAd-'+numArticle).val(1);
-					slots['article'+numArticle] = gptadslots;
-
-					
-				
+				$('#showAd-'+numArticle).val(1);
 			}
 
 			function loadSecondAds(numArticle){
-
-				var tags = $('#articleShareData'+numArticle).data('article-tags').split(',');
-				console.log("Llamado a loadSecondAds valor de showAd: "+$('#showAd-'+numArticle).val());
-				var gptadslots = [];
-				var nid = $('#articleShareData'+numArticle).data('article-id');
-				let redactor = $('#articleShareData'+numArticle).data('article-redactor');
-				var adSeccion = $('#articleShareData'+numArticle).data('article-section');
-				var firstAd = 'div-Ad-Body-'+numArticle+'1';
-				var adsPreName = getSectionAdName(adSeccion, 1,numArticle);
-				var adsPreName1 = getSectionAdName(adSeccion, 1,numArticle);
-				var adsNamesDynamic = [];
-
-				//if(nid != 'PP3362444')
-				//		connatixCompanionVideo(numArticle);
 				
-					//if(numArticle > 1){
-						adsPreName = adsPreName + 'Scroll_';
-					//}
-
-					adsNamesDynamic[1] = adsPreName + 'Leaderboard_1';
-					adsNamesDynamic[2] = adsPreName + 'Leaderboard_2';
-					adsNamesDynamic[3] = adsPreName + 'Leaderboard_3';
-					adsNamesDynamic[4] = adsPreName + 'Leaderboard_4';
-					adsNamesDynamic[5] = adsPreName + 'Leaderboard_5';
-					adsNamesDynamic[6] = adsPreName + 'Leaderboard_6';
-					adsNamesDynamic[7] = adsPreName + 'Leaderboard_7';
-					adsNamesDynamic[8] = adsPreName + 'Leaderboard_8';
-					adsNamesDynamic[9] = adsPreName + 'Leaderboard_9';
-					adsNamesDynamic[10] = adsPreName + 'Leaderboard_10';
-					
-
-					if($('#showAd-'+numArticle).val() == 0){
-						createAdsSpot(numArticle);
-						labelEnPublicidad(numArticle);
-					}
-
-					googletag.cmd.push(function(){  
-
-							if(numArticle == 1){
-								gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[300, 250]], 'MO_DIS_Articulo_1').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Medium').addService(googletag.pubads());
-							}else{
-								gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[300, 250]], 'Article_Mobile_'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Medium').addService(googletag.pubads());
-							}
-
-							//llamado MGID
-							if(numArticle == 1){
-								$.loadScript('https://jsc.mgid.com/site/818538.js', function() {
-									callMgidAdInArticle(numArticle);
-								});
-							}
-
-							//llamado de pauta a kiosked
-							//if(numArticle == 1){
-							//	firstAd = 'div-gpt-ad-1720641920879-0';
-							//	gptadslots[3] = googletag.defineSlot('/11420885/1x1_DesktopMobile_ROS_V02', [1, 1], 'div-gpt-ad-1720641920879-0').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-							//}
-							
-							//Llamado al intext
-							if(numArticle == 1 && Config.variables.intext){
-								gptadslots[1] = googletag.defineSlot('/11420885/MO_VID_'+ getSectionAdName(adSeccion, 2,numArticle) +'_Articulo_Intext', [[1, 1], [300, 250], [320, 180]], 'divIntext-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-								firstAd = 'divIntext-1';
-							}
-
-
-							// Carga dinamica en el body 
-							//Una pauta cada 3 parrafos...
-							//Create div container for ad
-							
-							for(var i= 1; i <= counterProgramaticAd;i++){
-								
-								if($('#div-Ad-Body-'+numArticle+i).length  == 1){
-								
-									if(i==1){
-										gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit',adsNamesDynamic[i]).addService(googletag.pubads()));
-									}else{
-										gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit', adsNamesDynamic[i]).addService(googletag.pubads()));
-									}
-								}
-								
-							}
-
-							googletag.pubads().enableLazyLoad();
-							googletag.pubads().refresh(gptadslots );
-							//googletag.display( firstAd );
-						});
-
-					
-					$('#showAd-'+numArticle).val(2);
-					
-			}
-			
-
-		//}else{
-		@else
-
-			function callTopAd(){
-
-				$('#showAd-1').val(1);
-
-				
-				let adsPreName = getSectionAdName(adSeccion, 1, 1);
 				let gptadslots = [];
-				let tags = $('#articleShareData1').data('article-tags').split(',');
-				let nid = $('#articleShareData1').data('article-id');
-				let redactor = $('#articleShareData1').data('article-redactor');
+				let nid = $('#articleShareData'+numArticle).data('article-id');
+				let redactor = $('#articleShareData'+numArticle).data('article-redactor');
+				let adSeccion = $('#articleShareData'+numArticle).data('article-section');
+				let firstAd = 'div-Ad-Body-'+numArticle+'1';
+				let adsNamesDynamic = [];
+				let adsPreName = getSectionAdName(adSeccion, 1,numArticle);
+				let tags = $('#articleShareData'+numArticle).data('article-tags').split(',');
+
+				
+				if(numArticle > 1){
+					adsPreName = adsPreName + 'Scroll_';
+				}
+
+				adsNamesDynamic[1] = adsPreName + 'Leaderboard_1';
+				adsNamesDynamic[2] = adsPreName + 'Leaderboard_2';
+				adsNamesDynamic[3] = adsPreName + 'Leaderboard_3';
+				adsNamesDynamic[4] = adsPreName + 'Leaderboard_4';
+				adsNamesDynamic[5] = adsPreName + 'Leaderboard_5';
+				adsNamesDynamic[6] = adsPreName + 'Leaderboard_6';
+				adsNamesDynamic[7] = adsPreName + 'Leaderboard_7';
+				adsNamesDynamic[8] = adsPreName + 'Leaderboard_8';
+				adsNamesDynamic[9] = adsPreName + 'Leaderboard_9';
+				adsNamesDynamic[10] = adsPreName + 'Leaderboard_10';
+				
 
 				googletag.cmd.push(function(){
 
-					let spotDivName = 'articleMobileStickyAd';
-						gptadslots[0] =  googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[300, 50], [320, 50]],spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+					//llamado MGID
+					if(numArticle == 1){
+						console.log('Llamado MGID');
+						$.loadScript('https://jsc.mgid.com/site/818538.js', function() {
+							callMgidAdInArticle(numArticle);
+						});
+					}
+
+					//Llamado al intext
+					if(numArticle == 1 && Config.variables.intext == 1){
+						gptadslots[2] = googletag.defineSlot('/11420885/DE_VID_'+ getSectionAdName(adSeccion, 2,numArticle) +'_Articulo_Intext', [[1, 1], [640, 480], [640, 360]], 'divIntext-'+numArticle).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+						firstAd = 'divIntext-1';
+					}
+
+					//llamado de pauta a kiosked
+					/*
+					if(numArticle == 1){
+						firstAd = 'div-gpt-ad-1720641920879-0';
+						gptadslots[3] = googletag.defineSlot('/11420885/1x1_DesktopMobile_ROS_V02', [1, 1], 'div-gpt-ad-1720641920879-0').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+					}
+					*/
+
+					/* Carga dinamica en el body de pauta programatica */
+					for(var i= 1; i < counterProgramaticAd;i++){
+						if($('#div-Ad-Body-'+numArticle+i).length  == 1){
+							gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit',adsNamesDynamic[i]).addService(googletag.pubads()));
+						}
+					}	
+
+					@if($noads == false)	
+						//Pauta de fondo
+						gptadslots.push(googletag.defineSlot('/11420885/'+ adsPreName +'Skyscraper', [[160, 600], [300, 600]], 'Article_Desktop_Skycraper_'+numArticle).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
+						
+					@endif
 					
 					
-					//console.log('entre por aqui 7, , cambio x 50');
+					googletag.pubads().refresh(gptadslots);
+					googletag.display( firstAd );
 
-					googletag.pubads().collapseEmptyDivs();
-					googletag.pubads().disableInitialLoad();
-					googletag.pubads().enableSingleRequest();
-					googletag.enableServices();
-					googletag.pubads().refresh(gptadslots );
-
+					$('#showAd-'+numArticle).val(2);
 				});
+					
 
 			}
 
+	//}else{
+	@else
 
-			function mostrarAdsArticulo(num){
-				console.log('Llamado a mostrarAdsArticulo sin pauta');
 
-				$("#articleMobileStickyAd").remove();
+		function callTopAd(){
+
+			$('#showAd-1').val(1);
+
+			if($('#divContentFixedNative-1').length > 0){
+				$('#divContentFixedNative-1').remove();
 			}
 
-			function showBottomStickyAd(){
-				console.log('Llamado a showBottomStickyAd sin pauta');
-			}
+			
+			let adsPreName = getSectionAdName(adSeccion, 1, 1);
+			let gptadslots = [];
+			let tags = $('#articleShareData1').data('article-tags').split(',');
+			let nid = $('#articleShareData1').data('article-id');
+			let redactor = $('#articleShareData1').data('article-redactor');
 
-			function loadSecondAds(numArticle){
-				$('#showAd-1').val(0);
-				console.log('Llamado a loadSecondAds sin pauta');
-			}
+			googletag.cmd.push(function(){
+
+				let spotDivName = 'articleDesktopStickyAd';
+					gptadslots[10] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[728, 90], [970, 90]], spotDivName).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(1)).setTargeting('adUnit','BannerTop_General').addService(googletag.pubads());
+				
+				
 
 
-			callTopAd();
+				googletag.pubads().collapseEmptyDivs();
+				googletag.pubads().enableSingleRequest();
+				googletag.pubads().disableInitialLoad();
+				googletag.enableServices();
+				googletag.pubads().refresh(gptadslots);
+				
 
-		//}
-		@endif
-	
-	
+			});
+
+		}
+
+
+		function mostrarAdsArticulo(num){
+			console.log('Llamado a mostrarAdsArticulo sin pauta');
+
+			$("#articleDesktopStickyAd").remove();
+			
+		}
+
+		function showBottomStickyAd(){
+			console.log('Llamado a showBottomStickyAd sin pauta');
+		}
+
+		function loadSecondAds(numArticle){
+			$('#showAd-1').val(0);
+			console.log('Llamado a loadSecondAds sin pauta');
+		}
+
+
+		callTopAd();
+
+	@endif
+	//}
+
+
 @endminify
 </script>
