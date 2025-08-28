@@ -637,7 +637,7 @@
 							//gptadslotsRefresh[1] = googletag.defineSlot('/11420885/MO_DIS_'+getSectionAdName(adSeccion, 2)+'_Carrusel_Articulo', [300, 250], 'MO_DIS_Galeria_Articulo').setTargeting('refresh','true').setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
 							//gptadslots[20] = gptadslotsRefresh[1];
 							gptadslots[20] = googletag.defineSlot('/11420885/MO_DIS_'+getSectionAdName(adSeccion, 2)+'_Carrusel_Articulo', [300, 250], 'MO_DIS_Galeria_Articulo').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-							gptadslots[21] = googletag.defineSlot('/11420885/MO_DIS_'+getSectionAdName(adSeccion, 2)+"_Articulo_Leaderboard_1", [300, 250], 'MO_DIS_Galeria_Articulo_2').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
+							gptadslots[21] = googletag.defineSlot('/11420885/pulzo/' + adSeccion, [300, 250], 'MO_DIS_Galeria_Articulo_2').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Leaderboard_1').addService(googletag.pubads());
 							
 						}
 
@@ -745,9 +745,9 @@
 								if($('#div-Ad-Body-'+numArticle+i).length  == 1){
 								
 									if(i==1){
-										gptadslots.push(googletag.defineSlot('/11420885/' + adsNamesDynamic[i], [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
+										gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit',adsNamesDynamic[i]).addService(googletag.pubads()));
 									}else{
-										gptadslots.push(googletag.defineSlot('/11420885/' + adsNamesDynamic[i], [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
+										gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[336, 280], [300, 250], [300, 100], [300, 50]], 'div-Ad-Body-'+numArticle+i).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit', adsNamesDynamic[i]).addService(googletag.pubads()));
 									}
 								}
 								
