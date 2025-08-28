@@ -335,8 +335,7 @@
 
 					//cargar interstitial de google
 					if(numArticle == 1){
-						gptadslots[61] = googletag.defineOutOfPageSlot('/11420885/' + adsPreName  + 'Interstitial', googletag.enums.OutOfPageFormat.INTERSTITIAL).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
-
+						gptadslots[61] = googletag.defineOutOfPageSlot('/11420885/pulzo/' + adSeccion, googletag.enums.OutOfPageFormat.INTERSTITIAL).setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit',Interstitial).addService(googletag.pubads());
 						//preHome
 						if(prehomeEnable){
 							gptadslots[161] = googletag.defineSlot('/11420885/' + adsPreName + 'PreHome', [1,1], 'DIS_Intersticial_GO_Web').setTargeting('redactor', redactor ).setTargeting('seccion', adSeccion ).setTargeting('nid', nid ).setTargeting('interests', tags).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads());
@@ -507,7 +506,7 @@
 
 					@if($noads == false)	
 						//Pauta de fondo
-						gptadslots.push(googletag.defineSlot('/11420885/'+ adsPreName +'Skyscraper', [[160, 600], [300, 600]], 'Article_Desktop_Skycraper_'+numArticle).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(numArticle)).addService(googletag.pubads()));
+						gptadslots.push(googletag.defineSlot('/11420885/pulzo/' + adSeccion, [[160, 600], [300, 600]], 'Article_Desktop_Skycraper_'+numArticle).setTargeting('redactor', redactor ).setTargeting('nid', nid ).setTargeting('seccion', adSeccion ).setTargeting('content-type', articleContentType(numArticle)).setTargeting('adUnit','Skyscraper').addService(googletag.pubads()));
 						
 					@endif
 					
